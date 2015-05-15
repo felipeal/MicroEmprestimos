@@ -18,9 +18,9 @@ public class Project {
     String description;
     Float minDonationValue;
     Float targetValue;
-    Date limitDate;
+    String limitDate; // TODO: Usar classe para data
     
-    public Project(Integer enterpreneurId, String title, String description, Float minDonationValue, Float targetValue, Date limitDate) {
+    public Project(Integer enterpreneurId, String title, String description, Float minDonationValue, Float targetValue, String limitDate) {
         this.enterpreneurId = enterpreneurId;
         this.title = title;
         this.description = description;
