@@ -9,6 +9,10 @@ package domainlogic;
  *
  * @author Felipe
  */
-public class User {
+public abstract class User {
+    protected String login;
+    protected String password;
     
+    protected String name;
+    protected String location;
 }
