@@ -5,10 +5,27 @@
  */
 package domainlogic;
 
+import java.util.Date;
+
 /**
  *
  * @author Felipe
  */
 public class Project {
     
+    Integer enterpreneurId;
+    String title;
+    String description;
+    Float minDonationValue;
+    Float targetValue;
+    Date limitDate;
+    
+    public Project(Integer enterpreneurId, String title, String description, Float minDonationValue, Float targetValue, Date limitDate) {
+        this.enterpreneurId = enterpreneurId;
+        this.title = title;
+        this.description = description;
+        this.minDonationValue = minDonationValue;
+        this.targetValue = targetValue;
+        this.limitDate = limitDate;
+    }
 }
