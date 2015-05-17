@@ -45,10 +45,12 @@ public class Database {
     }
     
     public void save(Integer userId, User user) {
+        user.setId(userId);
         users.put(userId, user);
     }
     
     public void save(Integer projectId, Project project) {
+        project.setId(projectId);
         projects.put(projectId, project);
     }
     

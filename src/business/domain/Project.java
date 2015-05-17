@@ -13,12 +13,13 @@ import java.util.Date;
  */
 public class Project {
     
-    Integer enterpreneurId;
-    String title;
-    String description;
-    Float minDonationValue;
-    Float targetValue;
-    String limitDate; // TODO: Usar classe para data
+    private Integer id;
+    private Integer enterpreneurId;
+    private String title;
+    private String description;
+    private Float minDonationValue;
+    private Float targetValue;
+    private String limitDate; // TODO: Usar classe para data
     
     public Project(Integer enterpreneurId, String title, String description, Float minDonationValue, Float targetValue, String limitDate) {
         this.enterpreneurId = enterpreneurId;
@@ -31,5 +32,13 @@ public class Project {
     
     public String getTitle() {
         return title;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
