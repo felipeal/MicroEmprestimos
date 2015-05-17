@@ -23,7 +23,7 @@ public class Database {
     private Map<Integer, User> users;
     private Map<Integer, Project> projects;
     
-    Database() {
+    public Database() {
         users = new HashMap<>();
         projects = new HashMap<>();
         
@@ -44,27 +44,27 @@ public class Database {
         save(3, new Project(2, "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016-01-01"));
     }
     
-    void save(Integer userId, User user) {
+    public void save(Integer userId, User user) {
         users.put(userId, user);
     }
     
-    void save(Integer projectId, Project project) {
+    public void save(Integer projectId, Project project) {
         projects.put(projectId, project);
     }
     
-    User getUser(Integer userId) {
+    public User getUser(Integer userId) {
         return users.get(userId);
     }
     
-    Project getProject(Integer projectId) {
+    public Project getProject(Integer projectId) {
         return projects.get(projectId);
     }
     
-    Collection<User> getAllUsers() {
+    public Collection<User> getAllUsers() {
         return users.values();
     }
     
-    Collection<Project> getAllProjects() {
+    public Collection<Project> getAllProjects() {
         return projects.values();
     }
 }

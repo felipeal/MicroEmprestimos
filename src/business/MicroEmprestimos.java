@@ -1,5 +1,8 @@
 package business;
 
+import business.action.SearchProjectAction;
+import persistence.Database;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +20,7 @@ public class MicroEmprestimos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Database database = new Database();
+        SearchProjectAction searchProjectAction = new SearchProjectAction(database);
     }
-    
 }

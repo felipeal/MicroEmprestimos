@@ -5,12 +5,33 @@
  */
 package business.action;
 
+import business.domain.Project;
+import java.util.ArrayList;
+import java.util.Collection;
+import persistence.Database;
+
 /**
  *
  * @author Felipe
  */
 public class SearchProjectAction {
-    void execute() {
+    
+    Database database;
+    
+    public SearchProjectAction(Database database) {
+        this.database = database;
+    }
+    
+    Collection<Project> searchByTitle(String searchTerm) {
         
+        ArrayList<Project> foundProjects = new ArrayList<>();
+        
+        for (Project project : database.getAllProjects()) {
+            if (project.getTitle().equals(searchTerm)) {
+                foundProjects.add(project);
+            }
+        }
+        
+        return foundProjects;
     }
 }

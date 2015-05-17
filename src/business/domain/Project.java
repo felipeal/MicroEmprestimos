@@ -28,4 +28,8 @@ public class Project {
         this.targetValue = targetValue;
         this.limitDate = limitDate;
     }
+    
+    public String getTitle() {
+        return title;
+    }
 }
