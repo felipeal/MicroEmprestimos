@@ -5,10 +5,10 @@
  */
 package persistence;
 
-import domainlogic.Project;
-import domainlogic.User;
-import domainlogic.Enterpreneur;
-import domainlogic.Donator;
+import business.domain.Project;
+import business.domain.User;
+import business.domain.Enterpreneur;
+import business.domain.Donator;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

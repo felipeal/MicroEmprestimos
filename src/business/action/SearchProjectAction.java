@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domainlogic;
+package business.action;
 
 /**
  *
  * @author Felipe
  */
-public abstract class User {
-    protected String login;
-    protected String password;
-    
-    protected String name;
-    protected String location;
+public class SearchProjectAction {
+    void execute() {
+        
+    }
 }
