@@ -22,7 +22,7 @@ public class SearchProjectAction {
         this.database = database;
     }
     
-    Collection<Project> searchByTitle(String searchTerm) {
+    public Collection<Project> searchByTitle(String searchTerm) {
         
         ArrayList<Project> foundProjects = new ArrayList<>();
         

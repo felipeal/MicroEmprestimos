@@ -1,6 +1,8 @@
 package business;
 
 import business.action.SearchProjectAction;
+import clientcommunication.Communicator;
+import java.io.IOException;
 import persistence.Database;
 
 /*
@@ -19,8 +21,9 @@ public class MicroEmprestimos {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Database database = new Database();
         SearchProjectAction searchProjectAction = new SearchProjectAction(database);
+        new Communicator(17592, searchProjectAction).execute();
     }
 }
