@@ -10,18 +10,18 @@ package business.domain;
  * @author Felipe
  */
 public abstract class User {
-    protected Integer id;
+    protected final int id;
     protected String login;
     protected String password;
     
     protected String name;
     protected String location;
     
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public User (int id) {
         this.id = id;
+    }
+    
+    public int getId() {
+        return id;
     }
 }

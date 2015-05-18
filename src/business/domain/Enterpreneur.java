@@ -10,7 +10,8 @@ package business.domain;
  * @author Felipe
  */
 public class Enterpreneur extends User {
-    public Enterpreneur(String login, String password, String name, String location) {
+    public Enterpreneur(int id, String login, String password, String name, String location) {
+        super(id);
         this.login = login;
         this.password = password;
         this.name = name;

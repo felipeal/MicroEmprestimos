@@ -30,27 +30,57 @@ public class Communicator {
     
     public void execute() throws IOException {
         ServerSocket server = new ServerSocket(this.port);
-        System.out.println("Porta "+this.port+" aberta!");
+        System.out.println("Port "+this.port+" open!");
         
-        // Wait for client
-        Socket client = server.accept();
-        System.out.println("Nova conexão com o cliente " + client.getInetAddress().getHostAddress());
-        
-        PrintStream clientOutput = new PrintStream(client.getOutputStream());
-        Scanner scanner = new Scanner(client.getInputStream());
-        
-        switch (scanner.nextLine()) {
-            case "search":
-                searchAction(clientOutput, scanner);
-                break;
+        while (true) {
+            // Wait for client
+            Socket client = server.accept();
+            System.out.println("New connection with client " + client.getInetAddress().getHostAddress());
+
+            PrintStream msgToClient = new PrintStream(client.getOutputStream());
+            Scanner msgFromClient = new Scanner(client.getInputStream());
+
+            while (msgFromClient.hasNextLine()) {
+                switch (msgFromClient.nextLine()) {
+                    case "search":
+                        System.out.println("Client " + client.getInetAddress().getHostAddress() + " requested a search:");
+                        searchAction(msgToClient, msgFromClient);
+                        break;
+
+                    default:
+                        msgToClient.println("-1");
+                }
+            }
         }
     }
     
     private void searchAction(PrintStream client, Scanner scanner) {
-        ArrayList<Project> projects = new ArrayList<>(searchProjectAction.searchByTitle(scanner.nextLine()));
-        for (Project project : projects) {
-            client.println();
+        ArrayList<Project> projects;
+        
+        
+        switch (scanner.nextLine()) {
+            case "title":
+                String title = scanner.nextLine();
+                System.out.println("By title: " + title);
+                projects = new ArrayList<>(searchProjectAction.searchByTitle(title));
+                break;
+              
+            case "cancel":
+                return;
+                
+            default:
+                client.println("-1");
+                return;
         }
+        
+        for (Project project : projects) {
+            System.out.println(project.getId());
+            client.println(project.getId());
+            System.out.println(project.getTitle());
+            client.println(project.getTitle());
+        }
+        
+        client.println("-1");
     } 
     
 }

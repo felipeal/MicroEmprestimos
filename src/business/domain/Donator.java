@@ -10,7 +10,8 @@ package business.domain;
  * @author Felipe
  */
 public class Donator extends User {
-    public Donator(String login, String password, String name, String location) {
+    public Donator(int id, String login, String password, String name, String location) {
+        super(id);
         this.login = login;
         this.password = password;
         this.name = name;

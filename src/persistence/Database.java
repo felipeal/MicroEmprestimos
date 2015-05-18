@@ -32,33 +32,35 @@ public class Database {
     
     private void populate() {
         
+        int id;
+        
         // Users
-        save(1, new Enterpreneur("ana", "123", "Ana", "Porto Alegre"));
-        save(2, new Enterpreneur("bruno", "123", "Bruno", "Pelotas"));
-        save(3, new Donator("carlos", "123", "Carlos", "Porto Alegre"));
-        save(4, new Donator("diego", "123", "Diego", "Pelotas"));
+        id = 0;
+        save(new Enterpreneur(id++, "ana", "123", "Ana", "Porto Alegre"));
+        save(new Enterpreneur(id++, "bruno", "123", "Bruno", "Pelotas"));
+        save(new Donator(id++, "carlos", "123", "Carlos", "Porto Alegre"));
+        save(new Donator(id++, "diego", "123", "Diego", "Pelotas"));
         
         // Projects
-        save(1, new Project(1, "Projeto 1 da Ana", "Sem descrição.", 10f, 1000f, "2016-01-01"));
-        save(2, new Project(1, "Projeto 2 da Ana", "Sem descrição.", 20f, 2000f, "2017-01-01"));
-        save(3, new Project(2, "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016-01-01"));
+        id = 0;
+        save(new Project(id++, 0, "Projeto 1 da Ana", "Sem descrição.", 10f, 1000f, "2016-01-01"));
+        save(new Project(id++, 0, "Projeto 2 da Ana", "Sem descrição.", 20f, 2000f, "2017-01-01"));
+        save(new Project(id++, 1, "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016-01-01"));
     }
     
-    public void save(Integer userId, User user) {
-        user.setId(userId);
-        users.put(userId, user);
+    public void save(User user) {
+        users.put(user.getId(), user);
     }
     
-    public void save(Integer projectId, Project project) {
-        project.setId(projectId);
-        projects.put(projectId, project);
+    public void save(Project project) {
+        projects.put(project.getId(), project);
     }
     
-    public User getUser(Integer userId) {
+    public User getUser(int userId) {
         return users.get(userId);
     }
     
-    public Project getProject(Integer projectId) {
+    public Project getProject(int projectId) {
         return projects.get(projectId);
     }
     

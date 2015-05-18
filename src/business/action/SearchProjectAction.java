@@ -27,7 +27,7 @@ public class SearchProjectAction {
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            if (project.getTitle().equals(searchTerm)) {
+            if (project.getTitle().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
