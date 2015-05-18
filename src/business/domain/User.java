@@ -16,12 +16,28 @@ public abstract class User {
     
     protected String name;
     protected String location;
-    
+
     public User (int id) {
         this.id = id;
     }
     
     public int getId() {
         return id;
+    }
+    
+    public String getLogin() {
+        return login;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public String getName() {
+        return name;
+    }   
+    
+    public String getLocation() {
+        return location;
     }
 }

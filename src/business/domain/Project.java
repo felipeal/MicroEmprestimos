@@ -17,7 +17,8 @@ public class Project {
     private int enterpreneurId;
     private String title;
     private String description;
-    private float minDonationValue;
+    private float donatedAmount;
+    private float minDonationAmount;
     private float targetValue;
     private String limitDate; // TODO: Usar classe para data
     
@@ -26,7 +27,8 @@ public class Project {
         this.enterpreneurId = enterpreneurId;
         this.title = title;
         this.description = description;
-        this.minDonationValue = minDonationValue;
+        this.donatedAmount = 0;
+        this.minDonationAmount = minDonationValue;
         this.targetValue = targetValue;
         this.limitDate = limitDate;
     }
@@ -41,5 +43,16 @@ public class Project {
     
     public String getDescription() {
         return description;
+    }
+
+    public float getRemainingAmount() {
+        if (donatedAmount < minDonationAmount)
+            return minDonationAmount - donatedAmount;
+        else
+            return 0;
+    }
+    
+    public float getDonatedAmount() {
+        return donatedAmount;
     }
 }
