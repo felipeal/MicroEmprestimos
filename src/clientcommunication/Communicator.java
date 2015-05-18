@@ -57,14 +57,40 @@ public class Communicator {
     private void searchAction(PrintStream client, Scanner scanner) {
         ArrayList<Project> projects;
         
-        
+        // Gets the line containing the mode for the search
         switch (scanner.nextLine()) {
             case "title":
                 String title = scanner.nextLine();
                 System.out.println("By title: " + title);
                 projects = new ArrayList<>(searchProjectAction.searchByTitle(title));
                 break;
-              
+                
+            case "description":
+                String description = scanner.nextLine();
+                System.out.println("By description: " + description);
+                projects = new ArrayList<>(searchProjectAction.searchByDescription(description));
+                break;
+                
+            case "remainingAmount":
+                String remainingAmount = scanner.nextLine();
+                System.out.println("By remaining amount: " + remainingAmount);
+                String[] remainingValues = remainingAmount.split("-");
+                projects = new ArrayList<>(searchProjectAction.searchByRemainingAmount(Float.parseFloat(remainingValues[0]), Float.parseFloat(remainingValues.length > 0 ? remainingValues[remainingValues.length] : remainingValues[0])));
+                break;
+                
+            case "achievedAmount":
+                String achievedAmount = scanner.nextLine();
+                System.out.println("By achieved amount: " + achievedAmount);
+                String[] achievedValues = achievedAmount.split("-");
+                projects = new ArrayList<>(searchProjectAction.searchByAchievedAmount(Float.parseFloat(achievedValues[0]), Float.parseFloat(achievedValues.length > 0 ? achievedValues[achievedValues.length] : achievedValues[0])));
+                break;
+                
+//            case "expirationDate":
+//                String expirationDate = scanner.nextLine();
+//                System.out.println("By title: " + expirationDate);
+//                projects = new ArrayList<>(searchProjectAction.searchByExpirationDate(expirationDate));
+//                break;
+                
             case "cancel":
                 return;
                 

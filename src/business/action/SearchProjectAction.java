@@ -34,4 +34,27 @@ public class SearchProjectAction {
         
         return foundProjects;
     }
+    
+    public Collection<Project> searchByDescription(String searchTerm) {
+        
+        ArrayList<Project> foundProjects = new ArrayList<>();
+        
+        for (Project project : database.getAllProjects()) {
+            if (project.getDescription().contains(searchTerm)) {
+                foundProjects.add(project);
+            }
+        }
+        
+        return foundProjects;
+    }
+    
+    public Collection<Project> searchByRemainingAmount(float min, float max) {
+        
+        
+    }
+    
+    public Collection<Project> searchByAchievedAmount(float min, float max) {
+        
+        
+    }
 }

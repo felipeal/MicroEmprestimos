@@ -31,11 +31,15 @@ public class Project {
         this.limitDate = limitDate;
     }
     
+    public int getId() {
+        return id;
+    }
+    
     public String getTitle() {
         return title;
     }
     
-    public int getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 }
