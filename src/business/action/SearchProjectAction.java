@@ -15,12 +15,10 @@ import persistence.Database;
  *
  * @author Felipe
  */
-public class SearchProjectAction {
-    
-    Database database;
-    
+public class SearchProjectAction extends AbstractAction {
+
     public SearchProjectAction(Database database) {
-        this.database = database;
+        super(database);
     }
     
     public Collection<Project> searchByTitle(String searchTerm) {

@@ -10,19 +10,27 @@ package business.domain;
  * @author Felipe
  */
 public abstract class User {
-    protected final int id;
+    protected int id;
     protected String login;
     protected String password;
     
     protected String name;
     protected String location;
 
-    public User (int id) {
-        this.id = id;
+    public User (String login, String password, String name, String location) {
+        this.id = -1;
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.location = location;
     }
     
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getLogin() {
