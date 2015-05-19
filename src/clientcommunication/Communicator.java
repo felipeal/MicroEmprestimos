@@ -64,6 +64,12 @@ public class Communicator {
                 System.out.println("By title: " + title);
                 projects = new ArrayList<>(searchProjectAction.searchByTitle(title));
                 break;
+            
+            case "enterpreneurName":
+                String name = scanner.nextLine();
+                System.out.println("By enterpreneur name: " + name);
+                projects = new ArrayList<>(searchProjectAction.searchByEnterpreneur(name));
+                break;
                 
             case "description":
                 String description = scanner.nextLine();
