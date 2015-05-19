@@ -5,8 +5,8 @@
  */
 package business.action;
 
+import business.domain.Enterpreneur;
 import business.domain.Project;
-import business.domain.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import persistence.Database;
@@ -92,8 +92,8 @@ public class SearchProjectAction extends AbstractAction {
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            User user = database.getUser(project.getEnterpreneurId());
-            if (user.getName().contains(searchTerm)) {
+            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
+            if (enterpreneur.getName().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
@@ -106,8 +106,8 @@ public class SearchProjectAction extends AbstractAction {
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            User user = database.getUser(project.getEnterpreneurId());
-            if (user.getLocation().contains(searchTerm)) {
+            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
+            if (enterpreneur.getLocation().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
