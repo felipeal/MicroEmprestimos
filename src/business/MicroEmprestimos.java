@@ -1,5 +1,6 @@
 package business;
 
+import business.action.DonateToProjectAction;
 import business.action.SearchProjectAction;
 import clientcommunication.Communicator;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class MicroEmprestimos {
     public static void main(String[] args) throws IOException {
         Database database = new Database();
         SearchProjectAction searchProjectAction = new SearchProjectAction(database);
+        DonateToProjectAction donateToProjectAction = new DonateToProjectAction(database);
         new Communicator(17592, searchProjectAction).execute();
     }
 }
