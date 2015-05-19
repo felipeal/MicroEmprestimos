@@ -5,8 +5,8 @@
  */
 package business.action;
 
+import business.domain.Enterpreneur;
 import business.domain.Project;
-import business.domain.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import persistence.Database;
@@ -15,12 +15,10 @@ import persistence.Database;
  *
  * @author Felipe
  */
-public class SearchProjectAction {
-    
-    Database database;
-    
+public class SearchProjectAction extends AbstractAction {
+
     public SearchProjectAction(Database database) {
-        this.database = database;
+        super(database);
     }
     
     public Collection<Project> searchByTitle(String searchTerm) {
@@ -75,17 +73,27 @@ public class SearchProjectAction {
         return foundProjects;
     }
     
-    //public Collection<Project> searchByExpirationDate(Date min, Date max) {
-    //
-    //}
+    public Collection<Project> searchByExpirationDate(String dateMin, String dateMax) {
+        
+        ArrayList<Project> foundProjects = new ArrayList<>();
+        
+        for (Project project : database.getAllProjects()) {
+            if (project.getLimitDate().compareTo(dateMin) >= 0 && // Greater than dateMin
+                project.getLimitDate().compareTo(dateMax) <= 0) { // Smaller than dateMax
+                foundProjects.add(project);
+            }
+        }
+        
+        return foundProjects;
+    }
     
     public Collection<Project> searchByEnterpreneur(String searchTerm) {
         
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            User user = database.getUser(project.getEnterpreneurId());
-            if (user.getName().contains(searchTerm)) {
+            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
+            if (enterpreneur.getName().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
@@ -98,8 +106,8 @@ public class SearchProjectAction {
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            User user = database.getUser(project.getEnterpreneurId());
-            if (user.getLocation().contains(searchTerm)) {
+            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
+            if (enterpreneur.getLocation().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }

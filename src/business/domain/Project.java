@@ -5,7 +5,10 @@
  */
 package business.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import persistence.Database;
 
 /**
  *
@@ -13,21 +16,23 @@ import java.util.Date;
  */
 public class Project {
     
-    private final int id;
+    private Database database;
+    
+    private int id;
     private int enterpreneurId;
     private String title;
     private String description;
-    private float donatedAmount;
+    private List<Integer> donationIds;
     private float minDonationAmount;
     private float targetValue;
     private String limitDate; // TODO: Usar classe para data
     
-    public Project(int id, int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
-        this.id = id;
+    public Project(Database database, int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
+        this.id = -1;
         this.enterpreneurId = enterpreneurId;
         this.title = title;
         this.description = description;
-        this.donatedAmount = 0;
+        this.donationIds = new ArrayList<>();
         this.minDonationAmount = minDonationValue;
         this.targetValue = targetValue;
         this.limitDate = limitDate;
@@ -35,6 +40,14 @@ public class Project {
     
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public int getEnterpreneurId() {
+        return enterpreneurId;
     }
     
     public String getTitle() {
@@ -46,13 +59,35 @@ public class Project {
     }
 
     public float getRemainingAmount() {
-        if (donatedAmount < minDonationAmount)
-            return minDonationAmount - donatedAmount;
+        if (getDonatedAmount() < minDonationAmount)
+            return minDonationAmount - getDonatedAmount();
         else
             return 0;
     }
     
+    public void addDonation(int donationId) {
+        donationIds.add(donationId);
+    }
+    
     public float getDonatedAmount() {
+        float donatedAmount = 0;
+        
+        for (Integer donationId : donationIds) {
+            donatedAmount += database.getDonation(donationId).getAmount();
+        }
+        
         return donatedAmount;
+    }
+    
+    public float getMinDonationAmount() {
+        return minDonationAmount;
+    }
+    
+    public float getTargetValue() {
+        return targetValue;
+    }
+    
+    public String getLimitDate() {
+        return limitDate;
     }
 }

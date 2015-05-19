@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.domain;
+package business.action;
+
+import persistence.Database;
 
 /**
  *
  * @author Felipe
  */
-public class Enterpreneur extends User {
-    public Enterpreneur(String login, String password, String name, String location) {
-        super(login, password, name, location);
+public abstract class AbstractAction {
+    Database database;
+    
+    public AbstractAction(Database database) {
+        this.database = database;
     }
 }
