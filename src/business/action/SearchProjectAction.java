@@ -114,4 +114,8 @@ public class SearchProjectAction extends AbstractAction {
         
         return foundProjects;
     }
+    
+    public Project getSelectedProject(int projectId) {
+        return database.getProject(projectId);
+    }
 }
