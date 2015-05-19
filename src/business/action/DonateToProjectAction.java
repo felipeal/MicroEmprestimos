@@ -38,5 +38,6 @@ public class DonateToProjectAction extends AbstractAction {
         Donation donation = new Donation(donatorId, amount);
         database.save(donation);
         project.addDonation(donation.getId());
+        System.out.println(donation.getId());
     }
 }

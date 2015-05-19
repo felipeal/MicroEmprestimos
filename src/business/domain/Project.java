@@ -29,6 +29,7 @@ public class Project {
     
     public Project(Database database, int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
         this.id = -1;
+        this.database = database;
         this.enterpreneurId = enterpreneurId;
         this.title = title;
         this.description = description;
@@ -59,8 +60,8 @@ public class Project {
     }
 
     public float getRemainingAmount() {
-        if (getDonatedAmount() < minDonationAmount)
-            return minDonationAmount - getDonatedAmount();
+        if (getDonatedAmount() < targetValue)
+            return targetValue - getDonatedAmount();
         else
             return 0;
     }

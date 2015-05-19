@@ -77,6 +77,9 @@ public class Database {
     public void save(Donation donation) {
         donation.setId(nextDonationId++);
         donations.put(donation.getId(), donation);
+        for (int ids : donations.keySet()) {
+            System.out.println("Tabelinha de ids no database: " + ids);
+        }
     }
     
     public Enterpreneur getEnterpreneur(int enterpreneurId) {
@@ -92,6 +95,9 @@ public class Database {
     }
     
     public Donation getDonation(int donationId) {
+        if (!donations.containsKey(donationId))
+            return null;
+        
         return donations.get(donationId);
     }
     

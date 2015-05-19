@@ -43,6 +43,7 @@ public class HandleClient implements Runnable {
                     break;
                 
                 case "search":
+                    System.out.println("teste");
                     searchAction();
                     break;
                     
@@ -66,7 +67,7 @@ public class HandleClient implements Runnable {
         fromClient.nextLine(); // Discard password
         this.clientId = 0;
         toClient.println("success");
-        toClient.println(100f);
+        toClient.println(searchProjectAction.getCurrentDonator(this.clientId).getBalance());
     }
     
     private boolean checkLogin () {
@@ -75,7 +76,7 @@ public class HandleClient implements Runnable {
             toClient.println("Client not logged in.");
             return false;
         } else
-            return false;
+            return true;
     }
     
     private void searchAction() {
@@ -87,8 +88,11 @@ public class HandleClient implements Runnable {
         
         ArrayList<Project> projects;
         
+        String mode = fromClient.nextLine();
+        System.out.println(mode);
+        
         // Gets the line containing the mode for the search
-        switch (fromClient.nextLine()) {
+        switch (mode) {
             case "title":
                 String title = fromClient.nextLine();
                 System.out.println("By title: " + title);
@@ -117,21 +121,21 @@ public class HandleClient implements Runnable {
                 String remainingAmount = fromClient.nextLine();
                 System.out.println("By remaining amount: " + remainingAmount);
                 String[] remainingValues = remainingAmount.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByRemainingAmount(Float.parseFloat(remainingValues[0]), Float.parseFloat(remainingValues.length > 0 ? remainingValues[remainingValues.length] : remainingValues[0])));
+                projects = new ArrayList<>(searchProjectAction.searchByRemainingAmount(Float.parseFloat(remainingValues[0]), Float.parseFloat(remainingValues[remainingValues.length-1])));
                 break;
                 
             case "achievedAmount":
                 String achievedAmount = fromClient.nextLine();
                 System.out.println("By achieved amount: " + achievedAmount);
                 String[] achievedValues = achievedAmount.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByAchievedAmount(Float.parseFloat(achievedValues[0]), Float.parseFloat(achievedValues.length > 0 ? achievedValues[achievedValues.length] : achievedValues[0])));
+                projects = new ArrayList<>(searchProjectAction.searchByAchievedAmount(Float.parseFloat(achievedValues[0]), Float.parseFloat(achievedValues[achievedValues.length-1])));
                 break;
                 
             case "expirationDate":
                 String expirationDate = fromClient.nextLine();
                 System.out.println("By expiration date: " + expirationDate);
                 String[] expirationValues = expirationDate.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByExpirationDate(expirationValues[0], expirationValues.length > 0 ? expirationValues[expirationValues.length] : expirationValues[0]));
+                projects = new ArrayList<>(searchProjectAction.searchByExpirationDate(expirationValues[0], expirationValues[expirationValues.length-1]));
                 break;
                 
             case "cancel":
@@ -166,7 +170,7 @@ public class HandleClient implements Runnable {
         }
         
         toClient.println(project.getTitle());
-        toClient.println(searchProjectAction.getSelectedProjectEnterpreneur(project.getId()));
+        toClient.println(searchProjectAction.getSelectedProjectEnterpreneur(project.getId()).getName());
         toClient.println(project.getDescription());
         toClient.println(project.getMinDonationAmount());
         toClient.println(project.getDonatedAmount());
