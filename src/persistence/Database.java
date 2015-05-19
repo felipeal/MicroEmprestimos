@@ -53,9 +53,9 @@ public class Database {
         save(diego);
         
         // Projects
-        save(new Project(this, ana.getId(), "Projeto 1 da Ana", "Sem descrição.", 10f, 1000f, "2016-01-01"));
-        save(new Project(this, ana.getId(), "Projeto 2 da Ana", "Sem descrição.", 20f, 2000f, "2017-01-01"));
-        save(new Project(this, bruno.getId(), "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016-01-01"));
+        save(new Project(this, ana.getId(), "Projeto 1 da Ana", "Sem descrição.", 10f, 1000f, "2016.01.01"));
+        save(new Project(this, ana.getId(), "Projeto 2 da Ana", "Sem descrição.", 20f, 2000f, "2017.01.01"));
+        save(new Project(this, bruno.getId(), "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016.01.01"));
     }
     
     public void save(Enterpreneur enterpreneur) {

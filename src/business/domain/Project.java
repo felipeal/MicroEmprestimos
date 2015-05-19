@@ -86,4 +86,8 @@ public class Project {
     public float getTargetValue() {
         return targetValue;
     }
+    
+    public String getLimitDate() {
+        return limitDate;
+    }
 }

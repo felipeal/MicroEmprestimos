@@ -73,9 +73,19 @@ public class SearchProjectAction extends AbstractAction {
         return foundProjects;
     }
     
-    //public Collection<Project> searchByExpirationDate(Date min, Date max) {
-    //
-    //}
+    public Collection<Project> searchByExpirationDate(String dateMin, String dateMax) {
+        
+        ArrayList<Project> foundProjects = new ArrayList<>();
+        
+        for (Project project : database.getAllProjects()) {
+            if (project.getLimitDate().compareTo(dateMin) >= 0 && // Greater than dateMin
+                project.getLimitDate().compareTo(dateMax) <= 0) { // Smaller than dateMax
+                foundProjects.add(project);
+            }
+        }
+        
+        return foundProjects;
+    }
     
     public Collection<Project> searchByEnterpreneur(String searchTerm) {
         
