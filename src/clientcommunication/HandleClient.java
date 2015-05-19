@@ -101,6 +101,12 @@ public class HandleClient implements Runnable {
                 projects = new ArrayList<>(searchProjectAction.searchByEnterpreneur(name));
                 break;
                 
+            case "locale":
+                String locale = fromClient.nextLine();
+                System.out.println("By locale: " + locale);
+                projects = new ArrayList<>(searchProjectAction.searchByLocation(locale));
+                break;
+                
             case "description":
                 String description = fromClient.nextLine();
                 System.out.println("By description: " + description);
