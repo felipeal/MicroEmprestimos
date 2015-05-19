@@ -21,7 +21,7 @@ public class DonateToProjectAction extends AbstractAction {
         super(database);
     }
     
-    void donateToProject(int donatorId, int projectId, float amount) throws BusinessException {
+    public void donateToProject(int donatorId, int projectId, float amount) throws BusinessException {
         // TODO: Validate donator/project id
         
         // Validate amount

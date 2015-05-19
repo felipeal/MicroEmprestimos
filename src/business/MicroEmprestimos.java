@@ -26,6 +26,6 @@ public class MicroEmprestimos {
         Database database = new Database();
         SearchProjectAction searchProjectAction = new SearchProjectAction(database);
         DonateToProjectAction donateToProjectAction = new DonateToProjectAction(database);
-        new Communicator(17592, searchProjectAction).execute();
+        new Communicator(17592, searchProjectAction, donateToProjectAction).execute();
     }
 }
