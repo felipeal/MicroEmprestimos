@@ -5,6 +5,7 @@
  */
 package business.action;
 
+import business.domain.Donator;
 import business.domain.Enterpreneur;
 import business.domain.Project;
 import java.util.ArrayList;
@@ -117,5 +118,14 @@ public class SearchProjectAction extends AbstractAction {
     
     public Project getSelectedProject(int projectId) {
         return database.getProject(projectId);
+    }
+    
+    public Enterpreneur getSelectedProjectEnterpreneur(int projectId) {
+        Project project = database.getProject(projectId);
+        return database.getEnterpreneur(project.getEnterpreneurId());
+    }
+    
+    public Donator getCurrentDonator(int donatorId) {
+        return database.getDonator(donatorId);
     }
 }
