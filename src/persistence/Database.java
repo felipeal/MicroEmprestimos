@@ -44,19 +44,10 @@ public class Database {
         // Users
         Enterpreneur ana = new Enterpreneur("ana", "123", "Ana", "Porto Alegre");
         Enterpreneur bruno = new Enterpreneur("bruno", "123", "Bruno", "Pelotas");
-<<<<<<< HEAD
-<<<<<<< HEAD
-        Donator carlos = new Donator("carlos", "123", "Carlos", "Porto Alegre", 5000f);
-        Donator diego = new Donator("diego", "123", "Diego", "Pelotas", 2000f);
-=======
+
         Donator carlos = new Donator("carlos", "123", "Carlos", "Porto Alegre", 100f);
         Donator diego = new Donator("diego", "123", "Diego", "Pelotas", 100f);
->>>>>>> origin/master
-=======
-        Donator carlos = new Donator("carlos", "123", "Carlos", "Porto Alegre");
-        Donator diego = new Donator("diego", "123", "Diego", "Pelotas");
->>>>>>> 76a6439e4f386c7bd86658377d0f1a1edb08bf71
-        
+
         save(ana);
         save(bruno);
         save(carlos);
