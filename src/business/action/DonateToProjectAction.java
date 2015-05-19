@@ -5,6 +5,7 @@
  */
 package business.action;
 
+import business.BusinessException;
 import business.domain.Donation;
 import business.domain.Donator;
 import business.domain.Project;
@@ -20,7 +21,7 @@ public class DonateToProjectAction extends AbstractAction {
         super(database);
     }
     
-    void donateToProject(int donatorId, int projectId, float amount) {
+    void donateToProject(int donatorId, int projectId, float amount) throws BusinessException {
         // TODO: Validate donator/project id
         
         // Validate amount
@@ -31,6 +32,8 @@ public class DonateToProjectAction extends AbstractAction {
             throw new BusinessException("Invalid amount for project.");
         if (amount > donator.getBalance())
             throw new BusinessException("Insuficcient balance.");
+        
+        donator.setBalance(donator.getBalance() - amount);
         
         Donation donation = new Donation(donatorId, amount);
         database.save(donation);

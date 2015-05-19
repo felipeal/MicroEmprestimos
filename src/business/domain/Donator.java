@@ -10,7 +10,19 @@ package business.domain;
  * @author Felipe
  */
 public class Donator extends User {
-    public Donator(String login, String password, String name, String location) {
+    
+    private float balance;
+    
+    public Donator(String login, String password, String name, String location, float balance) {
         super(login, password, name, location);
+        this.balance = balance;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
 }
