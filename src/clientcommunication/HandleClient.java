@@ -46,6 +46,10 @@ public class HandleClient implements Runnable {
                     searchAction();
                     break;
                     
+                case "getProject":
+                    getProject();
+                    break;
+                    
                 case "donate":
                     donateAction();
                     break;
@@ -62,6 +66,7 @@ public class HandleClient implements Runnable {
         fromClient.nextLine(); // Discard password
         this.clientId = 0;
         toClient.println("success");
+        toClient.println(100f);
     }
     
     private boolean checkLogin () {
@@ -143,6 +148,26 @@ public class HandleClient implements Runnable {
         toClient.println("-1");
     } 
 
+    private void getProject() {
+        Project project = searchProjectAction.getSelectedProject(Integer.parseInt(fromClient.nextLine()));
+        
+        if (project == null) {
+            toClient.println("exception");
+            toClient.println("No project found.");
+            return;
+        } else {
+            toClient.println("success");
+        }
+        
+        toClient.println(project.getTitle());
+        toClient.println(searchProjectAction.getSelectedProjectEnterpreneur(project.getId()));
+        toClient.println(project.getDescription());
+        toClient.println(project.getMinDonationAmount());
+        toClient.println(project.getDonatedAmount());
+        toClient.println(project.getTargetValue());
+        toClient.println(project.getLimitDate());
+    }
+    
     private void donateAction() {
         
         if (checkLogin() == false) {
@@ -154,6 +179,7 @@ public class HandleClient implements Runnable {
         try {
             donateToProjectAction.donateToProject(this.clientId, Integer.parseInt(fromClient.nextLine()), Float.parseFloat(fromClient.nextLine()));
             toClient.println("success");
+            toClient.println(searchProjectAction.getCurrentDonator(this.clientId).getBalance());
         } catch (BusinessException ex) {
             toClient.println("exception");
             toClient.println(ex.getMessage());
