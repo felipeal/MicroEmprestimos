@@ -45,8 +45,8 @@ public class Database {
         Enterpreneur ana = new Enterpreneur("ana", "123", "Ana", "Porto Alegre");
         Enterpreneur bruno = new Enterpreneur("bruno", "123", "Bruno", "Pelotas");
 
-        Donator carlos = new Donator("carlos", "123", "Carlos", "Porto Alegre", 100f);
-        Donator diego = new Donator("diego", "123", "Diego", "Pelotas", 100f);
+        Donator carlos = new Donator("carlos", "123", "Carlos", 100f);
+        Donator diego = new Donator("diego", "123", "Diego", 100f);
 
         save(ana);
         save(bruno);

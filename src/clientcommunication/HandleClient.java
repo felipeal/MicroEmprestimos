@@ -12,8 +12,6 @@ import business.domain.Project;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,19 +20,25 @@ import java.util.logging.Logger;
 public class HandleClient implements Runnable {
     
     private int clientId;
-    private PrintStream toClient;
-    private Scanner fromClient;
+    private Role clientRole;
+    private final PrintStream toClient;
+    private final Scanner fromClient;
     private final SearchProjectAction searchProjectAction;
     private final DonateToProjectAction donateToProjectAction;
     
+    private enum Role {
+        Administrator, Donator, Enterpreneur, NotLogged;
+    }
+    
     public HandleClient(PrintStream toClient, Scanner fromClient, SearchProjectAction searchProjectAction, DonateToProjectAction donateToProjectAction) {
-        this.clientId = -1; // -1 means client is not logged in
+        this.clientRole = Role.NotLogged;
         this.toClient = toClient;
         this.fromClient = fromClient;
         this.searchProjectAction = searchProjectAction;
         this.donateToProjectAction = donateToProjectAction;
     }
     
+    @Override
     public void run() {
         while (fromClient.hasNextLine()) {
             switch (fromClient.nextLine()) {
@@ -70,18 +74,20 @@ public class HandleClient implements Runnable {
         toClient.println(searchProjectAction.getCurrentDonator(this.clientId).getBalance());
     }
     
-    private boolean checkLogin () {
-        if (this.clientId == -1) {
+    private boolean checkLogin(Role role) {
+        if ((role == null && clientRole != Role.NotLogged) || (role != null && clientRole == role)) {
+            toClient.println("success");
+            return true;
+        } else {
             toClient.println("exception");
             toClient.println("Client not logged in.");
             return false;
-        } else
-            return true;
+        }
     }
     
     private void searchAction() {
         
-        if (checkLogin() == false) {
+        if (checkLogin(null) == false) {
             fromClient.nextLine(); // Discard value
             return;
         }
@@ -180,7 +186,7 @@ public class HandleClient implements Runnable {
     
     private void donateAction() {
         
-        if (checkLogin() == false) {
+        if (checkLogin(Role.Donator) == false) {
             fromClient.nextLine(); // Discard projectId
             fromClient.nextLine(); // Discard amount
             return;

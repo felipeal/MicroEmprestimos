@@ -15,14 +15,12 @@ public abstract class User {
     protected String password;
     
     protected String name;
-    protected String location;
 
-    public User (String login, String password, String name, String location) {
+    public User (String login, String password, String name) {
         this.id = -1;
         this.login = login;
         this.password = password;
         this.name = name;
-        this.location = location;
     }
     
     public int getId() {
@@ -45,7 +43,4 @@ public abstract class User {
         return name;
     }   
     
-    public String getLocation() {
-        return location;
-    }
 }

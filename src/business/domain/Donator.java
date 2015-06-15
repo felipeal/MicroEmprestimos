@@ -13,8 +13,8 @@ public class Donator extends User {
     
     private float balance;
     
-    public Donator(String login, String password, String name, String location, float balance) {
-        super(login, password, name, location);
+    public Donator(String login, String password, String name, float balance) {
+        super(login, password, name);
         this.balance = balance;
     }
 
