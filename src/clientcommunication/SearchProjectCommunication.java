@@ -9,6 +9,7 @@ import business.action.SearchProjectAction;
 import business.domain.Project;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -113,7 +114,22 @@ public class SearchProjectCommunication {
         }
         
         // Send the finish mark value
-        toClient.println("-1");
+        toClient.println("end");
+    }
+    
+    public void getOwnedProjects(int clientId) {
+        // Get all projects from entrepreneur
+        List<Project> projects = new ArrayList<>(searchProjectAction.searchByEntrepreneurId(clientId));
+        
+        for (Project project : projects) {
+            // Send project id
+            toClient.println(project.getId());
+            // Send project title
+            toClient.println(project.getTitle());
+        }
+        
+        // Send the finish mark value
+        toClient.println("end");
     }
     
     public void getProject() {

@@ -73,6 +73,12 @@ public class HandleClient implements Runnable {
                         new DonateToProjectCommunication(donateToProjectAction, searchProjectAction, toClient, fromClient).donate(this.clientId);
                     }
                     break;
+                    
+                case "getOwnedProjects":
+                    if (checkLogin(Role.Entrepreneur)) {
+                        new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getOwnedProjects(this.clientId);
+                    }
+                    break;
                 
                 case "getProject":
                     new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getProject();
