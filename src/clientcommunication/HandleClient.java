@@ -6,12 +6,18 @@
 package clientcommunication;
 
 import business.BusinessException;
+import business.action.BuyCreditsAction;
+import business.action.CreateProjectAction;
 import business.action.DonateToProjectAction;
+import business.action.LoginAction;
+import business.action.RegisterUserAction;
 import business.action.SearchProjectAction;
+import business.domain.Donator;
+import business.domain.Entrepreneur;
 import business.domain.Project;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.util.Pair;
 
 /**
  *
@@ -23,19 +29,31 @@ public class HandleClient implements Runnable {
     private Role clientRole;
     private final PrintStream toClient;
     private final Scanner fromClient;
-    private final SearchProjectAction searchProjectAction;
-    private final DonateToProjectAction donateToProjectAction;
     
-    private enum Role {
+    // Actions
+    private final BuyCreditsAction buyCreditsAction;
+    private final CreateProjectAction createProjectAction;
+    private final DonateToProjectAction donateToProjectAction;
+    private final LoginAction loginAction;
+    private final RegisterUserAction registerUserAction;
+    private final SearchProjectAction searchProjectAction;
+    
+    public enum Role {
         Administrator, Donator, Entrepreneur, NotLogged;
     }
     
-    public HandleClient(PrintStream toClient, Scanner fromClient, SearchProjectAction searchProjectAction, DonateToProjectAction donateToProjectAction) {
+    public HandleClient(PrintStream toClient, Scanner fromClient) {
         this.clientRole = Role.NotLogged;
         this.toClient = toClient;
         this.fromClient = fromClient;
-        this.searchProjectAction = searchProjectAction;
-        this.donateToProjectAction = donateToProjectAction;
+        
+        // Inicialize actions
+        this.buyCreditsAction = new BuyCreditsAction();
+        this.createProjectAction = new CreateProjectAction();
+        this.donateToProjectAction = new DonateToProjectAction();
+        this.loginAction = new LoginAction();
+        this.registerUserAction = new RegisterUserAction();
+        this.searchProjectAction = new SearchProjectAction();
     }
     
     @Override
@@ -43,20 +61,27 @@ public class HandleClient implements Runnable {
         while (fromClient.hasNextLine()) {
             switch (fromClient.nextLine()) {
                 case "login":
-                    loginAction();
+                    // Try to login and get the id and role of the client
+                    Pair<Integer,Role> loginData = new LoginCommunication(loginAction, toClient, fromClient).login();
+                    // Set the id
+                    clientId = loginData.getKey();
+                    // Set the role
+                    clientRole = loginData.getValue();
                     break;
                 
                 case "search":
-                    System.out.println("teste");
-                    searchAction();
+                    // Can only be done if logged in
+                    if (checkLogin() == true) {
+                        new SearchProjectCommunication(searchProjectAction, toClient, fromClient).search();
+                    }
                     break;
                     
                 case "getProject":
-                    getProject();
+                    new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getProject();
                     break;
                     
                 case "donate":
-                    donateAction();
+                    donate();
                     break;
 
                 default:
@@ -65,17 +90,26 @@ public class HandleClient implements Runnable {
         }
     }
     
-    private void loginAction() {
-        // HARDCODED LOGIN
-        fromClient.nextLine(); // Discard username
-        fromClient.nextLine(); // Discard password
-        this.clientId = 0;
-        toClient.println("success");
-        toClient.println(searchProjectAction.getCurrentDonator(this.clientId).getBalance());
-    }
-    
-    private boolean checkLogin(Role role) {
-        if ((role == null && clientRole != Role.NotLogged) || (role != null && clientRole == role)) {
+    /**
+     * 
+     * @param roles
+     * @return true if logged in one of the given roles
+     */
+    private boolean checkLogin(Role... roles) {
+        boolean nullArgs = true;
+        boolean permissionGranted = false;
+        
+        for (Role role : roles) {
+            nullArgs = false;
+            if (clientRole == role)
+                permissionGranted = true;
+        }
+        if (nullArgs == true) {
+            if (clientRole != Role.NotLogged)
+                permissionGranted = true;
+        }
+        
+        if (permissionGranted) {
             toClient.println("success");
             return true;
         } else {
@@ -85,106 +119,7 @@ public class HandleClient implements Runnable {
         }
     }
     
-    private void searchAction() {
-        
-        if (checkLogin(null) == false) {
-            fromClient.nextLine(); // Discard value
-            return;
-        }
-        
-        ArrayList<Project> projects;
-        
-        String mode = fromClient.nextLine();
-        System.out.println(mode);
-        
-        // Gets the line containing the mode for the search
-        switch (mode) {
-            case "title":
-                String title = fromClient.nextLine();
-                System.out.println("By title: " + title);
-                projects = new ArrayList<>(searchProjectAction.searchByTitle(title));
-                break;
-            
-            case "entrepreneurName":
-                String name = fromClient.nextLine();
-                System.out.println("By entrepreneur name: " + name);
-                projects = new ArrayList<>(searchProjectAction.searchByEntrepreneur(name));
-                break;
-                
-            case "locale":
-                String locale = fromClient.nextLine();
-                System.out.println("By locale: " + locale);
-                projects = new ArrayList<>(searchProjectAction.searchByLocation(locale));
-                break;
-                
-            case "description":
-                String description = fromClient.nextLine();
-                System.out.println("By description: " + description);
-                projects = new ArrayList<>(searchProjectAction.searchByDescription(description));
-                break;
-                
-            case "remainingAmount":
-                String remainingAmount = fromClient.nextLine();
-                System.out.println("By remaining amount: " + remainingAmount);
-                String[] remainingValues = remainingAmount.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByRemainingAmount(Float.parseFloat(remainingValues[0]), Float.parseFloat(remainingValues[remainingValues.length-1])));
-                break;
-                
-            case "achievedAmount":
-                String achievedAmount = fromClient.nextLine();
-                System.out.println("By achieved amount: " + achievedAmount);
-                String[] achievedValues = achievedAmount.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByAchievedAmount(Float.parseFloat(achievedValues[0]), Float.parseFloat(achievedValues[achievedValues.length-1])));
-                break;
-                
-            case "expirationDate":
-                String expirationDate = fromClient.nextLine();
-                System.out.println("By expiration date: " + expirationDate);
-                String[] expirationValues = expirationDate.split("-");
-                projects = new ArrayList<>(searchProjectAction.searchByExpirationDate(expirationValues[0], expirationValues[expirationValues.length-1]));
-                break;
-                
-            case "cancel":
-                return;
-                
-            default:
-                fromClient.nextLine(); // Discard value
-                toClient.println("exception");
-                toClient.println("No such function.");
-                return;
-        }
-        
-        for (Project project : projects) {
-            System.out.println(project.getId());
-            toClient.println(project.getId());
-            System.out.println(project.getTitle());
-            toClient.println(project.getTitle());
-        }
-        
-        toClient.println("-1");
-    } 
-
-    private void getProject() {
-        Project project = searchProjectAction.getSelectedProject(Integer.parseInt(fromClient.nextLine()));
-        
-        if (project == null) {
-            toClient.println("exception");
-            toClient.println("No project found.");
-            return;
-        } else {
-            toClient.println("success");
-        }
-        
-        toClient.println(project.getTitle());
-        toClient.println(searchProjectAction.getSelectedProjectEntrepreneur(project.getId()).getName());
-        toClient.println(project.getDescription());
-        toClient.println(project.getMinDonationAmount());
-        toClient.println(project.getDonatedAmount());
-        toClient.println(project.getTargetValue());
-        toClient.println(project.getLimitDate());
-    }
-    
-    private void donateAction() {
+    private void donate() {
         
         if (checkLogin(Role.Donator) == false) {
             fromClient.nextLine(); // Discard projectId

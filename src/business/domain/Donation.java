@@ -10,9 +10,9 @@ package business.domain;
  * @author Felipe
  */
 public class Donation {
-    protected int id;
-    int donatorId;
-    float amount;
+    private int id;
+    private int donatorId;
+    private float amount;
     
     public Donation(int donatorId, float amount) {
         this.id = -1;

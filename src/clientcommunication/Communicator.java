@@ -5,14 +5,10 @@
  */
 package clientcommunication;
 
-import business.action.DonateToProjectAction;
-import business.action.SearchProjectAction;
-import business.domain.Project;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -22,13 +18,9 @@ import java.util.Scanner;
 public class Communicator {
 
     private final int port;
-    private final SearchProjectAction searchProjectAction;
-    private final DonateToProjectAction donateToProjectAction;
     
-    public Communicator(int port, SearchProjectAction searchProjectAction, DonateToProjectAction donateToProjectAction) {
+    public Communicator(int port) {
         this.port = port;
-        this.searchProjectAction = searchProjectAction;
-        this.donateToProjectAction = donateToProjectAction;
     }
     
     public void execute() throws IOException {
@@ -40,7 +32,7 @@ public class Communicator {
             Socket client = server.accept();
             System.out.println("New connection with client " + client.getInetAddress().getHostAddress());
 
-            HandleClient hc = new HandleClient(new PrintStream(client.getOutputStream()), new Scanner(client.getInputStream()), this.searchProjectAction, this.donateToProjectAction);
+            HandleClient hc = new HandleClient(new PrintStream(client.getOutputStream()), new Scanner(client.getInputStream()));
             new Thread(hc).start();
         }
     }
