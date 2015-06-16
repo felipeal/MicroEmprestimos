@@ -16,13 +16,11 @@ import persistence.Database;
  * @author Felipe
  */
 public class DonateToProjectAction extends AbstractAction {
-
-    public DonateToProjectAction(Database database) {
-        super(database);
-    }
     
     public void donateToProject(int donatorId, int projectId, float amount) throws BusinessException {
         // TODO: Validate donator/project id
+        
+        Database database = Database.getInstance();
         
         // Validate amount
         Project project = database.getProject(projectId);

@@ -109,4 +109,12 @@ public class Database {
     public Collection<Project> getAllProjects() {
         return projects.values();
     }
+    
+    public Collection<Enterpreneur> getAllEnterpreneurs() {
+        return enterpreneurs.values();
+    }
+    
+    public Collection<Donator> getAllDonators() {
+        return donators.values();
+    }
 }
