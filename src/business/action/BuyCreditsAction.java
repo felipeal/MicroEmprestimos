@@ -14,7 +14,7 @@ import persistence.Database;
  */
 public class BuyCreditsAction {
     
-    float buyCredits(int donatorId, float amount) {
+    public float buyCredits(int donatorId, float amount) {
         
         Database database = Database.getInstance();
         Donator donator = database.getDonator(donatorId);

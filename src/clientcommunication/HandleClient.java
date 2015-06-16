@@ -5,7 +5,6 @@
  */
 package clientcommunication;
 
-import business.BusinessException;
 import business.action.BuyCreditsAction;
 import business.action.CreateProjectAction;
 import business.action.DonateToProjectAction;
@@ -57,6 +56,22 @@ public class HandleClient implements Runnable {
     public void run() {
         while (fromClient.hasNextLine()) {
             switch (fromClient.nextLine()) {
+                case "buyCredits":
+                    if (checkLogin(Role.Donator)) {
+                        new BuyCreditsCommunication(buyCreditsAction, fromClient).buyCredits(this.clientId);
+                    }
+                    break;
+                
+                case "donate":
+                    if (checkLogin(Role.Donator) == true) {
+                        new DonateToProjectCommunication(donateToProjectAction, searchProjectAction, toClient, fromClient).donate(this.clientId);
+                    }
+                    break;
+                
+                case "getProject":
+                    new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getProject();
+                    break;
+                    
                 case "login":
                     // Try to login and get the id and role of the client
                     Pair<Integer,Role> loginData = new LoginCommunication(loginAction, toClient, fromClient).login();
@@ -74,16 +89,6 @@ public class HandleClient implements Runnable {
                     // Can only be done if logged in
                     if (checkLogin() == true) {
                         new SearchProjectCommunication(searchProjectAction, toClient, fromClient).search();
-                    }
-                    break;
-                    
-                case "getProject":
-                    new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getProject();
-                    break;
-                    
-                case "donate":
-                    if (checkLogin(Role.Donator) == true) {
-                        new DonateToProjectCommunication(donateToProjectAction, searchProjectAction, toClient, fromClient).donate(this.clientId);
                     }
                     break;
 
