@@ -104,6 +104,21 @@ public class SearchProjectAction extends AbstractAction {
         return foundProjects;
     }
     
+    public Collection<Project> searchByEntrepreneurId(int entrepreneurId) {
+        
+        Database database = Database.getInstance();
+        ArrayList<Project> foundProjects = new ArrayList<>();
+        
+        for (Project project : database.getAllProjects()) {
+            
+            if (project.getEntrepreneurId() == entrepreneurId) {
+                foundProjects.add(project);
+            }
+        }
+        
+        return foundProjects;
+    }
+    
     public Collection<Project> searchByLocation(String searchTerm) {
         
         Database database = Database.getInstance();
