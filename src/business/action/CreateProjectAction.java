@@ -18,5 +18,7 @@ public class CreateProjectAction {
         Project project = new Project(entrepreneurId, title, description, minDonationValue, targetValue, limitDate);
         
         database.save(project);
+        
+        return project;
     }
 }
