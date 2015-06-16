@@ -57,8 +57,14 @@ public class HandleClient implements Runnable {
         while (fromClient.hasNextLine()) {
             switch (fromClient.nextLine()) {
                 case "buyCredits":
-                    if (checkLogin(Role.Donator)) {
+                    if (checkLogin(Role.Donator) == true) {
                         new BuyCreditsCommunication(buyCreditsAction, fromClient).buyCredits(this.clientId);
+                    }
+                    break;
+                    
+                case "createProject":
+                    if (checkLogin(Role.Entrepreneur) == true) {
+                        new CreateProjectCommunication(createProjectAction, toClient, fromClient).createProject(this.clientId);
                     }
                     break;
                 

@@ -13,7 +13,7 @@ import persistence.Database;
  * @author Felipe
  */
 public class CreateProjectAction {
-    Project createProject(int entrepreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
+    public Project createProject(int entrepreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
         Database database = Database.getInstance();
         Project project = new Project(entrepreneurId, title, description, minDonationValue, targetValue, limitDate);
         
