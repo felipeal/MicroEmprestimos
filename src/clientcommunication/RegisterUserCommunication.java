@@ -26,7 +26,7 @@ public class RegisterUserCommunication {
         this.registerUserAction = registerUserAction;
     }
     
-    public void RegisterUser() {
+    public void registerUser() {
         // Receive the role
         String role = fromClient.nextLine();
         switch (role) {
@@ -36,13 +36,13 @@ public class RegisterUserCommunication {
             case "donator":
                 // Send function confirmation
                 toClient.println("success");
-                RegisterDonator();
+                registerDonator();
                 break;
                 
             case "entrepreneur":
                 // Send function confirmation
                 toClient.println("success");
-                RegisterEntrepreneur();
+                registerEntrepreneur();
                 break;
             
             default:
@@ -52,7 +52,7 @@ public class RegisterUserCommunication {
         }
     }
     
-    private void RegisterDonator() {
+    private void registerDonator() {
         // Receive login
         String login = fromClient.nextLine();
         // Receive password
@@ -72,7 +72,7 @@ public class RegisterUserCommunication {
         }
     }
     
-    private void RegisterEntrepreneur() {
+    private void registerEntrepreneur() {
         // Receive login
         String login = fromClient.nextLine();
         // Receive password

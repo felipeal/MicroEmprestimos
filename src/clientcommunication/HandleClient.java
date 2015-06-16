@@ -12,9 +12,6 @@ import business.action.DonateToProjectAction;
 import business.action.LoginAction;
 import business.action.RegisterUserAction;
 import business.action.SearchProjectAction;
-import business.domain.Donator;
-import business.domain.Entrepreneur;
-import business.domain.Project;
 import java.io.PrintStream;
 import java.util.Scanner;
 import javafx.util.Pair;
@@ -68,6 +65,10 @@ public class HandleClient implements Runnable {
                     // Set the role
                     clientRole = loginData.getValue();
                     break;
+                    
+                case "register":
+                    new RegisterUserCommunication(registerUserAction, toClient, fromClient).registerUser();
+                    break;
                 
                 case "search":
                     // Can only be done if logged in
@@ -81,11 +82,14 @@ public class HandleClient implements Runnable {
                     break;
                     
                 case "donate":
-                    donate();
+                    if (checkLogin(Role.Donator) == true) {
+                        new DonateToProjectCommunication(donateToProjectAction, searchProjectAction, toClient, fromClient).donate(this.clientId);
+                    }
                     break;
 
                 default:
-                    toClient.println("-1");
+                    toClient.println("exception");
+                    toClient.println("No such command.");
             }
         }
     }
@@ -119,21 +123,4 @@ public class HandleClient implements Runnable {
         }
     }
     
-    private void donate() {
-        
-        if (checkLogin(Role.Donator) == false) {
-            fromClient.nextLine(); // Discard projectId
-            fromClient.nextLine(); // Discard amount
-            return;
-        }
-        
-        try {
-            donateToProjectAction.donateToProject(this.clientId, Integer.parseInt(fromClient.nextLine()), Float.parseFloat(fromClient.nextLine()));
-            toClient.println("success");
-            toClient.println(searchProjectAction.getCurrentDonator(this.clientId).getBalance());
-        } catch (BusinessException ex) {
-            toClient.println("exception");
-            toClient.println(ex.getMessage());
-        }
-    }
 }
