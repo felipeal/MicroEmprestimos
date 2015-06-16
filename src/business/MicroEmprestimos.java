@@ -23,9 +23,8 @@ public class MicroEmprestimos {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        Database database = new Database();
-        SearchProjectAction searchProjectAction = new SearchProjectAction(database);
-        DonateToProjectAction donateToProjectAction = new DonateToProjectAction(database);
+        SearchProjectAction searchProjectAction = new SearchProjectAction();
+        DonateToProjectAction donateToProjectAction = new DonateToProjectAction();
         new Communicator(17592, searchProjectAction, donateToProjectAction).execute();
     }
 }

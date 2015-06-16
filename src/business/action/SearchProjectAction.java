@@ -17,13 +17,10 @@ import persistence.Database;
  * @author Felipe
  */
 public class SearchProjectAction extends AbstractAction {
-
-    public SearchProjectAction(Database database) {
-        super(database);
-    }
     
     public Collection<Project> searchByTitle(String searchTerm) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -37,6 +34,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByDescription(String searchTerm) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -50,6 +48,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByRemainingAmount(float min, float max) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -63,6 +62,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByAchievedAmount(float min, float max) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -76,6 +76,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByExpirationDate(String dateMin, String dateMax) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -90,6 +91,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByEnterpreneur(String searchTerm) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -104,6 +106,7 @@ public class SearchProjectAction extends AbstractAction {
     
     public Collection<Project> searchByLocation(String searchTerm) {
         
+        Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
@@ -117,15 +120,18 @@ public class SearchProjectAction extends AbstractAction {
     }
     
     public Project getSelectedProject(int projectId) {
+        Database database = Database.getInstance();
         return database.getProject(projectId);
     }
     
     public Enterpreneur getSelectedProjectEnterpreneur(int projectId) {
+        Database database = Database.getInstance();
         Project project = database.getProject(projectId);
         return database.getEnterpreneur(project.getEnterpreneurId());
     }
     
     public Donator getCurrentDonator(int donatorId) {
+        Database database = Database.getInstance();
         return database.getDonator(donatorId);
     }
 }

@@ -5,16 +5,12 @@
  */
 package business.action;
 
-import persistence.Database;
-
 /**
  *
  * @author Felipe
  */
 public abstract class AbstractAction {
-    Database database;
     
-    public AbstractAction(Database database) {
-        this.database = database;
+    public AbstractAction() {
     }
 }

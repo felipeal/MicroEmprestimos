@@ -16,8 +16,6 @@ import persistence.Database;
  */
 public class Project {
     
-    private Database database;
-    
     private int id;
     private int enterpreneurId;
     private String title;
@@ -27,9 +25,8 @@ public class Project {
     private float targetValue;
     private String limitDate; // TODO: Usar classe para data
     
-    public Project(Database database, int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
+    public Project(int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
         this.id = -1;
-        this.database = database;
         this.enterpreneurId = enterpreneurId;
         this.title = title;
         this.description = description;
@@ -71,6 +68,7 @@ public class Project {
     }
     
     public float getDonatedAmount() {
+        Database database = Database.getInstance();
         float donatedAmount = 0;
         
         for (Integer donationId : donationIds) {
