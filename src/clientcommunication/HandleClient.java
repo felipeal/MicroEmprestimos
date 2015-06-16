@@ -27,7 +27,7 @@ public class HandleClient implements Runnable {
     private final DonateToProjectAction donateToProjectAction;
     
     private enum Role {
-        Administrator, Donator, Enterpreneur, NotLogged;
+        Administrator, Donator, Entrepreneur, NotLogged;
     }
     
     public HandleClient(PrintStream toClient, Scanner fromClient, SearchProjectAction searchProjectAction, DonateToProjectAction donateToProjectAction) {
@@ -105,10 +105,10 @@ public class HandleClient implements Runnable {
                 projects = new ArrayList<>(searchProjectAction.searchByTitle(title));
                 break;
             
-            case "enterpreneurName":
+            case "entrepreneurName":
                 String name = fromClient.nextLine();
-                System.out.println("By enterpreneur name: " + name);
-                projects = new ArrayList<>(searchProjectAction.searchByEnterpreneur(name));
+                System.out.println("By entrepreneur name: " + name);
+                projects = new ArrayList<>(searchProjectAction.searchByEntrepreneur(name));
                 break;
                 
             case "locale":
@@ -176,7 +176,7 @@ public class HandleClient implements Runnable {
         }
         
         toClient.println(project.getTitle());
-        toClient.println(searchProjectAction.getSelectedProjectEnterpreneur(project.getId()).getName());
+        toClient.println(searchProjectAction.getSelectedProjectEntrepreneur(project.getId()).getName());
         toClient.println(project.getDescription());
         toClient.println(project.getMinDonationAmount());
         toClient.println(project.getDonatedAmount());

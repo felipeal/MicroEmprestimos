@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @author Felipe
  */
-public class Enterpreneur extends User {
+public class Entrepreneur extends User {
     
     private List<Integer> projectIds;
     private String location;
     
-    public Enterpreneur(String login, String password, String name, String location) {
+    public Entrepreneur(String login, String password, String name, String location) {
         super(login, password, name);
         this.location = location;
         this.projectIds = new ArrayList<>();

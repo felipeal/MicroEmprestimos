@@ -7,7 +7,7 @@ package persistence;
 
 import business.domain.Donation;
 import business.domain.Project;
-import business.domain.Enterpreneur;
+import business.domain.Entrepreneur;
 import business.domain.Donator;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,12 +19,12 @@ import java.util.Map;
  */
 public class Database {
     
-    private Map<Integer, Enterpreneur> enterpreneurs;
+    private Map<Integer, Entrepreneur> entrepreneurs;
     private Map<Integer, Donator> donators;
     private Map<Integer, Project> projects;
     private Map<Integer, Donation> donations;
     
-    private int nextEnterpreneurId = 0;
+    private int nextEntrepreneurId = 0;
     private int nextDonatorId = 0;
     private int nextProjectId = 0;
     private int nextDonationId = 0;
@@ -32,7 +32,7 @@ public class Database {
     private static final Database INSTANCE = new Database(); // Singleton pattern
     
     private Database() {
-        enterpreneurs = new HashMap<>();
+        entrepreneurs = new HashMap<>();
         donators = new HashMap<>();
         projects = new HashMap<>();
         donations = new HashMap<>();
@@ -47,8 +47,8 @@ public class Database {
     private void populate() {
         
         // Users
-        Enterpreneur ana = new Enterpreneur("ana", "123", "Ana", "Porto Alegre");
-        Enterpreneur bruno = new Enterpreneur("bruno", "123", "Bruno", "Pelotas");
+        Entrepreneur ana = new Entrepreneur("ana", "123", "Ana", "Porto Alegre");
+        Entrepreneur bruno = new Entrepreneur("bruno", "123", "Bruno", "Pelotas");
 
         Donator carlos = new Donator("carlos", "123", "Carlos", 100f);
         Donator diego = new Donator("diego", "123", "Diego", 100f);
@@ -64,9 +64,9 @@ public class Database {
         save(new Project(bruno.getId(), "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016.01.01"));
     }
     
-    public void save(Enterpreneur enterpreneur) {
-        enterpreneur.setId(nextEnterpreneurId++);
-        enterpreneurs.put(enterpreneur.getId(), enterpreneur);
+    public void save(Entrepreneur entrepreneur) {
+        entrepreneur.setId(nextEntrepreneurId++);
+        entrepreneurs.put(entrepreneur.getId(), entrepreneur);
     }
     
     public void save(Donator donator) {
@@ -87,8 +87,8 @@ public class Database {
         }
     }
     
-    public Enterpreneur getEnterpreneur(int enterpreneurId) {
-        return enterpreneurs.get(enterpreneurId);
+    public Entrepreneur getEntrepreneur(int entrepreneurId) {
+        return entrepreneurs.get(entrepreneurId);
     }
     
     public Donator getDonator(int donatorId) {
@@ -110,8 +110,8 @@ public class Database {
         return projects.values();
     }
     
-    public Collection<Enterpreneur> getAllEnterpreneurs() {
-        return enterpreneurs.values();
+    public Collection<Entrepreneur> getAllEntrepreneurs() {
+        return entrepreneurs.values();
     }
     
     public Collection<Donator> getAllDonators() {

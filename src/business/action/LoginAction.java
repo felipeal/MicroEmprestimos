@@ -6,7 +6,7 @@
 package business.action;
 
 import business.domain.Donator;
-import business.domain.Enterpreneur;
+import business.domain.Entrepreneur;
 import persistence.Database;
 
 /**
@@ -15,7 +15,7 @@ import persistence.Database;
  */
 public class LoginAction extends AbstractAction  {
     
-    // Returns logged enterpreneur on success, null on failure
+    // Returns logged entrepreneur on success, null on failure
 
     /**
      *
@@ -23,15 +23,15 @@ public class LoginAction extends AbstractAction  {
      * @param password
      * @return logged entrepreneur or null
      */
-        public Enterpreneur loginAsEnterpreneur(String username, String password) {
+        public Entrepreneur loginAsEntrepreneur(String username, String password) {
         
         Database database = Database.getInstance();
         
-        for (Enterpreneur enterpreneur : database.getAllEnterpreneurs()) {
+        for (Entrepreneur entrepreneur : database.getAllEntrepreneurs()) {
             
-            if (enterpreneur.getName().equals(username) &&
-                enterpreneur.getPassword().equals(password)) {
-                return enterpreneur;
+            if (entrepreneur.getName().equals(username) &&
+                entrepreneur.getPassword().equals(password)) {
+                return entrepreneur;
             }
         }
         

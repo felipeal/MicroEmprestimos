@@ -6,7 +6,7 @@
 package business.action;
 
 import business.domain.Donator;
-import business.domain.Enterpreneur;
+import business.domain.Entrepreneur;
 import business.domain.Project;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,14 +89,14 @@ public class SearchProjectAction extends AbstractAction {
         return foundProjects;
     }
     
-    public Collection<Project> searchByEnterpreneur(String searchTerm) {
+    public Collection<Project> searchByEntrepreneur(String searchTerm) {
         
         Database database = Database.getInstance();
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
-            if (enterpreneur.getName().contains(searchTerm)) {
+            Entrepreneur entrepreneur = database.getEntrepreneur(project.getEntrepreneurId());
+            if (entrepreneur.getName().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
@@ -110,8 +110,8 @@ public class SearchProjectAction extends AbstractAction {
         ArrayList<Project> foundProjects = new ArrayList<>();
         
         for (Project project : database.getAllProjects()) {
-            Enterpreneur enterpreneur = database.getEnterpreneur(project.getEnterpreneurId());
-            if (enterpreneur.getLocation().contains(searchTerm)) {
+            Entrepreneur entrepreneur = database.getEntrepreneur(project.getEntrepreneurId());
+            if (entrepreneur.getLocation().contains(searchTerm)) {
                 foundProjects.add(project);
             }
         }
@@ -124,10 +124,10 @@ public class SearchProjectAction extends AbstractAction {
         return database.getProject(projectId);
     }
     
-    public Enterpreneur getSelectedProjectEnterpreneur(int projectId) {
+    public Entrepreneur getSelectedProjectEntrepreneur(int projectId) {
         Database database = Database.getInstance();
         Project project = database.getProject(projectId);
-        return database.getEnterpreneur(project.getEnterpreneurId());
+        return database.getEntrepreneur(project.getEntrepreneurId());
     }
     
     public Donator getCurrentDonator(int donatorId) {

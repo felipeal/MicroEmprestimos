@@ -17,7 +17,7 @@ import persistence.Database;
 public class Project {
     
     private int id;
-    private int enterpreneurId;
+    private int entrepreneurId;
     private String title;
     private String description;
     private List<Integer> donationIds;
@@ -25,9 +25,9 @@ public class Project {
     private float targetValue;
     private String limitDate; // TODO: Usar classe para data
     
-    public Project(int enterpreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
+    public Project(int entrepreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
         this.id = -1;
-        this.enterpreneurId = enterpreneurId;
+        this.entrepreneurId = entrepreneurId;
         this.title = title;
         this.description = description;
         this.donationIds = new ArrayList<>();
@@ -44,8 +44,8 @@ public class Project {
         this.id = id;
     }
     
-    public int getEnterpreneurId() {
-        return enterpreneurId;
+    public int getEntrepreneurId() {
+        return entrepreneurId;
     }
     
     public String getTitle() {
