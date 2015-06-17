@@ -23,6 +23,10 @@ public class WithdrawCommunication extends AbstractCommunication {
         this.withdrawAction = new WithdrawAction();
     }
     
+    /**
+     * Communicates with the client to withdraw the money from the project.
+     * @param clientId 
+     */
     public void withdraw(int clientId) {
         // Receive project id
         int projectId = Integer.parseInt(fromClient.nextLine());

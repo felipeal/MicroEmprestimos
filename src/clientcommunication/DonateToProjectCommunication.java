@@ -26,6 +26,10 @@ public class DonateToProjectCommunication extends AbstractCommunication {
         this.searchProjectAction = new SearchProjectAction();
     }
     
+    /**
+     * Communicates with the client to receive the data for a donation.
+     * @param clientId 
+     */
     public void donate(int clientId) {
         // Send the function permission success
         toClient.println("success");

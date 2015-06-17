@@ -27,6 +27,10 @@ public class LoginCommunication extends AbstractCommunication {
         this.loginAction = new LoginAction();
     }
     
+    /**
+     * Communicates with the client to receive login information, then execute te corresponding function.
+     * @return a pair containing the client id and it's role
+     */
     public Pair<Integer,Role> login() {
         // The return variable, it has the id and the role of the client
         Pair<Integer,Role> loginData;
@@ -71,6 +75,13 @@ public class LoginCommunication extends AbstractCommunication {
 //    private int loginAdmin(String username, String password) throws BusinessException {
 //        
 //    }
+    /**
+     * Check login for a donator
+     * @param username
+     * @param password
+     * @return the donator's id
+     * @throws BusinessException 
+     */
     private int loginDonator(String username, String password) throws BusinessException {
         Donator donator = loginAction.loginAsDonator(username, password);
 
@@ -89,6 +100,13 @@ public class LoginCommunication extends AbstractCommunication {
         // Return the id
         return donator.getId();
     } 
+    /**
+     * Check login for an entrepreneur
+     * @param username
+     * @param password
+     * @return the entrepreneur's id
+     * @throws BusinessException 
+     */
     private int loginEntrepreneur(String username, String password) throws BusinessException {
         Entrepreneur entrepreneur = loginAction.loginAsEntrepreneur(username, password);
 

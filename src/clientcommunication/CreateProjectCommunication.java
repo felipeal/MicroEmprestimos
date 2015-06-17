@@ -22,6 +22,10 @@ public class CreateProjectCommunication extends AbstractCommunication {
         this.createProjectAction = new CreateProjectAction();
     }
     
+    /**
+     * Communicates with the client, receiving the data to create a new project, and calling for the createProject function.
+     * @param clientId 
+     */
     public void createProject(int clientId) {
         // Receive title
         String title = fromClient.nextLine();

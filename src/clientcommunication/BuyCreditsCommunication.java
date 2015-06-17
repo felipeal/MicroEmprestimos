@@ -21,6 +21,10 @@ public class BuyCreditsCommunication extends AbstractCommunication {
         this.buyCreditsAction = new BuyCreditsAction();
     }
     
+    /**
+     * Communicate with the client to execute the buyCredits function, adding credits to it's account.
+     * @param clientId 
+     */
     public void buyCredits(int clientId) {
         // Receive amount
         float amount = Float.parseFloat(fromClient.nextLine());

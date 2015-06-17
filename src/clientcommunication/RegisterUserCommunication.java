@@ -23,6 +23,9 @@ public class RegisterUserCommunication extends AbstractCommunication {
         this.registerUserAction = new RegisterUserAction();
     }
     
+    /**
+     * Communicates with the client to receive the data to create a new user.
+     */
     public void registerUser() {
         // Receive the role
         String role = fromClient.nextLine();
@@ -49,6 +52,9 @@ public class RegisterUserCommunication extends AbstractCommunication {
         }
     }
     
+    /**
+     * Register a donator
+     */
     private void registerDonator() {
         // Receive login
         String login = fromClient.nextLine();
@@ -69,6 +75,9 @@ public class RegisterUserCommunication extends AbstractCommunication {
         }
     }
     
+    /**
+     * Register an entrepreneur
+     */
     private void registerEntrepreneur() {
         // Receive login
         String login = fromClient.nextLine();

@@ -16,7 +16,7 @@ import java.util.Scanner;
 import javafx.util.Pair;
 
 /**
- *
+ * Handle each client to control it's session.
  * @author Igor
  */
 public class HandleClient implements Runnable {
@@ -52,6 +52,9 @@ public class HandleClient implements Runnable {
         this.searchProjectAction = new SearchProjectAction();
     }
     
+    /**
+     * Get the clients request and executes the corresponding function.
+     */
     @Override
     public void run() {
         while (fromClient.hasNextLine()) {
@@ -118,7 +121,7 @@ public class HandleClient implements Runnable {
     }
     
     /**
-     * 
+     * Check if the client is logged in one of the given roles.
      * @param roles
      * @return true if logged in one of the given roles
      */

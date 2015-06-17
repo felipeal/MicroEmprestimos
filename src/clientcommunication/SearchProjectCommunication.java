@@ -25,6 +25,9 @@ public class SearchProjectCommunication extends AbstractCommunication {
         this.searchProjectAction = new SearchProjectAction();
     }
     
+    /**
+     * Communicates with the client to execute the search.
+     */
     public void search() {
         
         ArrayList<Project> projects;
@@ -114,6 +117,10 @@ public class SearchProjectCommunication extends AbstractCommunication {
         toClient.println("end");
     }
     
+    /**
+     * Send to client all the projects he owns.
+     * @param clientId 
+     */
     public void getOwnedProjects(int clientId) {
         // Get all projects from entrepreneur
         List<Project> projects = new ArrayList<>(searchProjectAction.searchByEntrepreneurId(clientId));
@@ -129,6 +136,9 @@ public class SearchProjectCommunication extends AbstractCommunication {
         toClient.println("end");
     }
     
+    /**
+     * Send information about the project by the given id to the client.
+     */
     public void getProject() {
         // Search for the project with the id received
         Project project = searchProjectAction.getSelectedProject(Integer.parseInt(fromClient.nextLine()));

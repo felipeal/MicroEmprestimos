@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- *
+ * Controls the communication with the clients
  * @author Igor
  */
 public class Communicator {
@@ -23,6 +23,10 @@ public class Communicator {
         this.port = port;
     }
     
+    /**
+     * Open the port and wait for clients, when someone connects creates a new HandleClient for him and run it in a new thread.
+     * @throws IOException 
+     */
     public void execute() throws IOException {
         ServerSocket server = new ServerSocket(this.port);
         System.out.println("Port "+this.port+" open!");
