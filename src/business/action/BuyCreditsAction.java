@@ -14,6 +14,12 @@ import persistence.Database;
  */
 public class BuyCreditsAction {
     
+    /**
+     * Allows donator to buy credits
+     * @param donatorId
+     * @param amount
+     * @return donator's new balance
+     */
     public float buyCredits(int donatorId, float amount) {
         
         Database database = Database.getInstance();

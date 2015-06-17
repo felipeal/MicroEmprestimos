@@ -40,6 +40,10 @@ public class Database {
         populate();
     }
     
+    /**
+     * Get database singleton instance
+     * @return singleton's instance
+     */
     public static Database getInstance() {
         return INSTANCE;
     }
@@ -64,21 +68,37 @@ public class Database {
         save(new Project(bruno.getId(), "Projeto 1 do Bruno", "Sem descrição.", 10f, 1000f, "2016.01.01"));
     }
     
+    /**
+     * Adds an entrepreneur to the database, setting its ID incrementally
+     * @param entrepreneur
+     */
     public void save(Entrepreneur entrepreneur) {
         entrepreneur.setId(nextEntrepreneurId++);
         entrepreneurs.put(entrepreneur.getId(), entrepreneur);
     }
     
+    /**
+     * Adds a donator to the database, setting its ID incrementally
+     * @param donator
+     */
     public void save(Donator donator) {
         donator.setId(nextDonatorId++);
         donators.put(donator.getId(), donator);
     }
     
+    /**
+     * Adds a project to the database, setting its ID incrementally
+     * @param project
+     */
     public void save(Project project) {
         project.setId(nextProjectId++);
         projects.put(project.getId(), project);
     }
     
+    /**
+     * Adds a donation to the database, setting its ID incrementally
+     * @param donation
+     */
     public void save(Donation donation) {
         donation.setId(nextDonationId++);
         donations.put(donation.getId(), donation);

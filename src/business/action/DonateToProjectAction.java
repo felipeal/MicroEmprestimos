@@ -17,6 +17,13 @@ import persistence.Database;
  */
 public class DonateToProjectAction extends AbstractAction {
     
+    /**
+     * Create a donation by the specified donator to the specified project
+     * @param donatorId
+     * @param projectId
+     * @param amount
+     * @throws BusinessException
+     */
     public void donateToProject(int donatorId, int projectId, float amount) throws BusinessException {
         // TODO: Validate donator/project id
         

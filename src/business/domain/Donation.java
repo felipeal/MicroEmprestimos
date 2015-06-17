@@ -6,7 +6,7 @@
 package business.domain;
 
 /**
- *
+ * 
  * @author Felipe
  */
 public class Donation {
@@ -14,6 +14,11 @@ public class Donation {
     private int donatorId;
     private float amount;
     
+    /**
+     * Create new donation for donator.
+     * @param donatorId
+     * @param amount in credits
+     */
     public Donation(int donatorId, float amount) {
         this.id = -1;
         this.donatorId = donatorId;

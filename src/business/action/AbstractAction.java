@@ -11,6 +11,4 @@ package business.action;
  */
 public abstract class AbstractAction {
     
-    public AbstractAction() {
-    }
 }

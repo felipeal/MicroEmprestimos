@@ -16,6 +16,12 @@ public abstract class User {
     
     protected String name;
 
+    /**
+     * Constructor for generic user
+     * @param login unique login
+     * @param password
+     * @param name real name
+     */
     public User (String login, String password, String name) {
         this.id = -1;
         this.login = login;

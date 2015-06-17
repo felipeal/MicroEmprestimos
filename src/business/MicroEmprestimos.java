@@ -12,6 +12,7 @@ import java.io.IOException;
 public class MicroEmprestimos {
 
     /**
+     * Entry point for server
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {

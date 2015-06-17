@@ -15,8 +15,15 @@ import persistence.Database;
  */
 public class WithdrawAction extends AbstractAction {
     
+    /**
+     * Allows the owner of the project to withdraw the donated amount
+     * @param projectId
+     * @param entrepreneurId
+     * @throws BusinessException if already withdrawn/wrong owner/target not reached
+     */
     public void withdraw(int projectId, int entrepreneurId) throws BusinessException {
         
+        // TODO: Check expiration date
         Database database = Database.getInstance();
         Project project = database.getProject(projectId);
         

@@ -13,6 +13,13 @@ public class Donator extends User {
     
     private float balance;
     
+    /**
+     * Constructor for new donator
+     * @param login unique login
+     * @param password
+     * @param name real name
+     * @param balance initial balance
+     */
     public Donator(String login, String password, String name, float balance) {
         super(login, password, name);
         this.balance = balance;

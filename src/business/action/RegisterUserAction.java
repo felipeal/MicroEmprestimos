@@ -18,6 +18,15 @@ import persistence.Database;
  */
 public class RegisterUserAction {
     
+    /**
+     * Register a new entrepreneur on the system
+     * @param login
+     * @param password
+     * @param name
+     * @param location
+     * @return
+     * @throws BusinessException
+     */
     public Entrepreneur registerEntrepreneur(String login, String password, String name, String location) throws BusinessException {
         
         Database database = Database.getInstance();
@@ -33,6 +42,14 @@ public class RegisterUserAction {
         return entrepreneur;
     }
     
+    /**
+     * Register a new donator on the system
+     * @param login
+     * @param password
+     * @param name
+     * @return
+     * @throws BusinessException
+     */
     public Donator registerDonator(String login, String password, String name) throws BusinessException {
         
         Database database = Database.getInstance();

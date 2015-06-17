@@ -11,6 +11,12 @@ package business.domain;
  */
 public class Admin extends User {
 
+    /**
+     * System administrator constructor
+     * @param login unique login
+     * @param password
+     * @param name real name
+     */
     public Admin(String login, String password, String name) {
         super(login, password, name);
     }

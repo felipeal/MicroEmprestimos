@@ -17,6 +17,13 @@ public class Entrepreneur extends User {
     private List<Integer> projectIds;
     private String location;
     
+    /**
+     * Constructor for entrepreneur
+     * @param login unique login
+     * @param password
+     * @param name real name
+     * @param location where the entrepreneur resides
+     */
     public Entrepreneur(String login, String password, String name, String location) {
         super(login, password, name);
         this.location = location;

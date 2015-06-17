@@ -15,10 +15,8 @@ import persistence.Database;
  */
 public class LoginAction extends AbstractAction  {
     
-    // Returns logged entrepreneur on success, null on failure
-
     /**
-     *
+     * Tries to log in as an entrepreneur
      * @param username
      * @param password
      * @return logged entrepreneur or null
@@ -39,7 +37,7 @@ public class LoginAction extends AbstractAction  {
     }
     
     /**
-     *
+     * Tries to log in as a donator
      * @param username
      * @param password
      * @return logged donator or null
