@@ -58,35 +58,35 @@ public class HandleClient implements Runnable {
             switch (fromClient.nextLine()) {
                 case "buyCredits":
                     if (checkLogin(Role.Donator) == true) {
-                        new BuyCreditsCommunication(fromClient).buyCredits(this.clientId);
+                        new BuyCreditsCommunication(buyCreditsAction, fromClient).buyCredits(this.clientId);
                     }
                     break;
                     
                 case "createProject":
                     if (checkLogin(Role.Entrepreneur) == true) {
-                        new CreateProjectCommunication(toClient, fromClient).createProject(this.clientId);
+                        new CreateProjectCommunication(createProjectAction, toClient, fromClient).createProject(this.clientId);
                     }
                     break;
                 
                 case "donate":
                     if (checkLogin(Role.Donator) == true) {
-                        new DonateToProjectCommunication(toClient, fromClient).donate(this.clientId);
+                        new DonateToProjectCommunication(donateToProjectAction, searchProjectAction, toClient, fromClient).donate(this.clientId);
                     }
                     break;
                     
                 case "getOwnedProjects":
                     if (checkLogin(Role.Entrepreneur)) {
-                        new SearchProjectCommunication(toClient, fromClient).getOwnedProjects(this.clientId);
+                        new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getOwnedProjects(this.clientId);
                     }
                     break;
                 
                 case "getProject":
-                    new SearchProjectCommunication(toClient, fromClient).getProject();
+                    new SearchProjectCommunication(searchProjectAction, toClient, fromClient).getProject();
                     break;
                     
                 case "login":
                     // Try to login and get the id and role of the client
-                    Pair<Integer,Role> loginData = new LoginCommunication(toClient, fromClient).login();
+                    Pair<Integer,Role> loginData = new LoginCommunication(loginAction, toClient, fromClient).login();
                     // Set the id
                     clientId = loginData.getKey();
                     // Set the role
@@ -94,13 +94,13 @@ public class HandleClient implements Runnable {
                     break;
                     
                 case "register":
-                    new RegisterUserCommunication(toClient, fromClient).registerUser();
+                    new RegisterUserCommunication(registerUserAction, toClient, fromClient).registerUser();
                     break;
                 
                 case "search":
                     // Can only be done if logged in
                     if (checkLogin() == true) {
-                        new SearchProjectCommunication(toClient, fromClient).search();
+                        new SearchProjectCommunication(searchProjectAction, toClient, fromClient).search();
                     }
                     break;
 

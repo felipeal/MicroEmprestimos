@@ -15,15 +15,18 @@ import java.util.Scanner;
  *
  * @author Igor
  */
-public class DonateToProjectCommunication extends AbstractCommunication {
+public class DonateToProjectCommunication {
     
+    private final PrintStream toClient;
+    private final Scanner fromClient;
     private final DonateToProjectAction donateToProjectAction;
     private final SearchProjectAction searchProjectAction;
     
-    public DonateToProjectCommunication(PrintStream toClient, Scanner fromClient) {
-        super(toClient, fromClient);
-        this.donateToProjectAction = new DonateToProjectAction();
-        this.searchProjectAction = new SearchProjectAction();
+    public DonateToProjectCommunication(DonateToProjectAction donateToProjectAction, SearchProjectAction searchProjectAction, PrintStream toClient, Scanner fromClient) {
+        this.toClient = toClient;
+        this.fromClient = fromClient;
+        this.donateToProjectAction = donateToProjectAction;
+        this.searchProjectAction = searchProjectAction;
     }
     
     public void donate(int clientId) {

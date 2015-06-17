@@ -14,13 +14,16 @@ import java.util.Scanner;
  *
  * @author Igor
  */
-public class RegisterUserCommunication extends AbstractCommunication {
+public class RegisterUserCommunication {
     
+    private final PrintStream toClient;
+    private final Scanner fromClient;
     private final RegisterUserAction registerUserAction;
     
-    public RegisterUserCommunication(PrintStream toClient, Scanner fromClient) {
-        super(toClient, fromClient);
-        this.registerUserAction = new RegisterUserAction();
+    public RegisterUserCommunication(RegisterUserAction registerUserAction, PrintStream toClient, Scanner fromClient) {
+        this.toClient = toClient;
+        this.fromClient = fromClient;
+        this.registerUserAction = registerUserAction;
     }
     
     public void registerUser() {

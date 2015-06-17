@@ -13,13 +13,16 @@ import java.util.Scanner;
  *
  * @author Igor
  */
-public class CreateProjectCommunication extends AbstractCommunication {
+public class CreateProjectCommunication {
     
+    private final PrintStream toClient;
+    private final Scanner fromClient;
     private final CreateProjectAction createProjectAction;
     
-    public CreateProjectCommunication(PrintStream toClient, Scanner fromClient) {
-        super(toClient, fromClient);
-        this.createProjectAction = new CreateProjectAction();
+    public CreateProjectCommunication(CreateProjectAction createProjectAction, PrintStream toClient, Scanner fromClient) {
+        this.toClient = toClient;
+        this.fromClient = fromClient;
+        this.createProjectAction = createProjectAction;
     }
     
     public void createProject(int clientId) {

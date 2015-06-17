@@ -13,13 +13,14 @@ import java.util.Scanner;
  *
  * @author Igor
  */
-public class BuyCreditsCommunication extends AbstractCommunication {
+public class BuyCreditsCommunication {
     
+    private final Scanner fromClient;
     private final BuyCreditsAction buyCreditsAction;
     
-    public BuyCreditsCommunication(Scanner fromClient) {
-        super(null, fromClient);
-        this.buyCreditsAction = new BuyCreditsAction();
+    public BuyCreditsCommunication(BuyCreditsAction buyCreditsAction, Scanner fromClient) {
+        this.fromClient = fromClient;
+        this.buyCreditsAction = buyCreditsAction;
     }
     
     public void buyCredits(int clientId) {
