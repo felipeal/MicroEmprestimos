@@ -5,6 +5,7 @@
  */
 package business.action;
 
+import business.BusinessException;
 import business.domain.Project;
 import persistence.Database;
 
@@ -14,15 +15,23 @@ import persistence.Database;
  */
 public class WithdrawAction extends AbstractAction {
     
-    Project withdraw(int projectId) {
+    public void withdraw(int projectId, int entrepreneurId) throws BusinessException {
         
         Database database = Database.getInstance();
         Project project = database.getProject(projectId);
         
-        if (!project.isDone() && project.getDonatedAmount() >= project.getTargetValue()) {
-            project.setDone();
+        if (project.isDone()) {
+            throw new BusinessException("Already withdrawed.");
         }
         
-        return project;
+        if (project.getEntrepreneurId() != entrepreneurId) {
+            throw new BusinessException("Client is not project's owner.");
+        }
+        
+        if (project.getDonatedAmount() < project.getTargetValue()) {
+            throw new BusinessException("Donations haven't reached target value.");
+        }
+        
+        project.setDone();
     }
 }

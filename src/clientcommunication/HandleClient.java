@@ -103,6 +103,12 @@ public class HandleClient implements Runnable {
                         new SearchProjectCommunication(toClient, fromClient).search();
                     }
                     break;
+                    
+                case "withdraw":
+                    if (checkLogin(Role.Entrepreneur) == true) {
+                        new WithdrawCommunication(toClient, fromClient).withdraw(this.clientId);
+                    }
+                    break;
 
                 default:
                     toClient.println("exception");

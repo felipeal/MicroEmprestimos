@@ -6,7 +6,6 @@
 package clientcommunication;
 
 import business.action.BuyCreditsAction;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
