@@ -24,6 +24,7 @@ public class Project {
     private float minDonationAmount;
     private float targetValue;
     private String limitDate; // TODO: Usar classe para data
+    private boolean done;
     
     public Project(int entrepreneurId, String title, String description, float minDonationValue, float targetValue, String limitDate) {
         this.id = -1;
@@ -34,6 +35,7 @@ public class Project {
         this.minDonationAmount = minDonationValue;
         this.targetValue = targetValue;
         this.limitDate = limitDate;
+        this.done = false;
     }
     
     public int getId() {
@@ -88,5 +90,13 @@ public class Project {
     
     public String getLimitDate() {
         return limitDate;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 }
