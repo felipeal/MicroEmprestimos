@@ -18,16 +18,13 @@ import clientcommunication.HandleClient.Role;
  *
  * @author Igor
  */
-public class LoginCommunication {
+public class LoginCommunication extends AbstractCommunication {
     
-    private final PrintStream toClient;
-    private final Scanner fromClient;
     private final LoginAction loginAction;
     
-    public LoginCommunication(LoginAction loginAction, PrintStream toClient, Scanner fromClient) {
-        this.toClient = toClient;
-        this.fromClient = fromClient;
-        this.loginAction = loginAction;
+    public LoginCommunication(PrintStream toClient, Scanner fromClient) {
+        super(toClient, fromClient);
+        this.loginAction = new LoginAction();
     }
     
     public Pair<Integer,Role> login() {
