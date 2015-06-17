@@ -16,16 +16,13 @@ import java.util.Scanner;
  *
  * @author Igor
  */
-public class SearchProjectCommunication {
+public class SearchProjectCommunication extends AbstractCommunication {
     
-    private final PrintStream toClient;
-    private final Scanner fromClient;
     private final SearchProjectAction searchProjectAction;
     
-    public SearchProjectCommunication(SearchProjectAction searchProjectAction, PrintStream toClient, Scanner fromClient) {
-        this.toClient = toClient;
-        this.fromClient = fromClient;
-        this.searchProjectAction = searchProjectAction;
+    public SearchProjectCommunication(PrintStream toClient, Scanner fromClient) {
+        super(toClient, fromClient);
+        this.searchProjectAction = new SearchProjectAction();
     }
     
     public void search() {
