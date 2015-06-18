@@ -52,7 +52,7 @@ public class Donator extends User {
     public Collection<Donation> getAllDonations() {
         
         Database database = Database.getInstance();
-        LinkedHashSet<Donation> foundDonations = new LinkedHashSet<>();
+        ArrayList<Donation> foundDonations = new ArrayList<>();
         
         for (Integer donationId : donationIds) {
             foundDonations.add(database.getDonation(donationId));

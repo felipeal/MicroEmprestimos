@@ -17,17 +17,17 @@ public class LoginAction extends AbstractAction  {
     
     /**
      * Tries to log in as an entrepreneur
-     * @param username
+     * @param login
      * @param password
      * @return logged entrepreneur or null
      */
-        public Entrepreneur loginAsEntrepreneur(String username, String password) {
+        public Entrepreneur loginAsEntrepreneur(String login, String password) {
         
         Database database = Database.getInstance();
         
         for (Entrepreneur entrepreneur : database.getAllEntrepreneurs()) {
             
-            if (entrepreneur.getName().equals(username) &&
+            if (entrepreneur.getLogin().equals(login) &&
                 entrepreneur.getPassword().equals(password)) {
                 return entrepreneur;
             }
@@ -38,17 +38,17 @@ public class LoginAction extends AbstractAction  {
     
     /**
      * Tries to log in as a donator
-     * @param username
+     * @param login
      * @param password
      * @return logged donator or null
      */
-        public Donator loginAsDonator(String username, String password) {
+        public Donator loginAsDonator(String login, String password) {
         
         Database database = Database.getInstance();
         
         for (Donator donator : database.getAllDonators()) {
             
-            if (donator.getName().equals(username) &&
+            if (donator.getLogin().equals(login) &&
                 donator.getPassword().equals(password)) {
                 return donator;
             }

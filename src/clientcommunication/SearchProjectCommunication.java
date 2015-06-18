@@ -171,7 +171,7 @@ public class SearchProjectCommunication extends AbstractCommunication {
         if (role == Role.Entrepreneur)
             return new ArrayList(searchProjectAction.searchByEntrepreneurId(clientId));
         
-        if (role == Role.Administrator)
+        if (role == Role.Donator)
             return new ArrayList(searchProjectAction.searchByDonatorId(clientId));
         
         return new ArrayList();
