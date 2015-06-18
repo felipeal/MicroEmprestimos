@@ -12,6 +12,7 @@ package business.domain;
 public class Donation {
     private int id;
     private int donatorId;
+    private int projectId;
     private float amount;
     
     /**
@@ -19,9 +20,10 @@ public class Donation {
      * @param donatorId
      * @param amount in credits
      */
-    public Donation(int donatorId, float amount) {
+    public Donation(int donatorId, int projectId, float amount) {
         this.id = -1;
         this.donatorId = donatorId;
+        this.projectId = projectId;
         this.amount = amount;
     }
     
@@ -39,5 +41,9 @@ public class Donation {
 
     public float getAmount() {
         return amount;
+    }
+
+    public int getProjectId() {
+        return projectId;
     }
 }

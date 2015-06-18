@@ -5,11 +5,12 @@
  */
 package business.action;
 
+import business.domain.Donation;
 import business.domain.Donator;
 import business.domain.Entrepreneur;
 import business.domain.Project;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import persistence.Database;
 
 /**
@@ -26,7 +27,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByTitle(String searchTerm) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             if (project.getTitle().contains(searchTerm)) {
@@ -45,7 +46,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByDescription(String searchTerm) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             if (project.getDescription().contains(searchTerm)) {
@@ -65,7 +66,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByRemainingAmount(float min, float max) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             if (project.getRemainingAmount() >= min && project.getRemainingAmount() <= max) {
@@ -85,7 +86,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByAchievedAmount(float min, float max) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             if (project.getDonatedAmount() >= min && project.getDonatedAmount() <= max) {
@@ -105,7 +106,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByExpirationDate(String dateMin, String dateMax) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             if (project.getLimitDate().compareTo(dateMin) >= 0 && // Greater than dateMin
@@ -125,7 +126,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByEntrepreneur(String searchTerm) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             Entrepreneur entrepreneur = database.getEntrepreneur(project.getEntrepreneurId());
@@ -145,13 +146,33 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByEntrepreneurId(int entrepreneurId) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             
             if (project.getEntrepreneurId() == entrepreneurId) {
                 foundProjects.add(project);
             }
+        }
+        
+        return foundProjects;
+    }
+    
+    /**
+     * Search all projects that the donator donated to
+     * @param donatorId
+     * @return found projects
+     */
+    public Collection<Project> searchByDonatorId(int donatorId) {
+        
+        Database database = Database.getInstance();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
+        Donator donator = database.getDonator(donatorId);
+        
+        for (Donation donation : donator.getAllDonations()) {
+            int projectId = donation.getProjectId();
+            Project project = database.getProject(projectId);
+            foundProjects.add(project);
         }
         
         return foundProjects;
@@ -165,7 +186,7 @@ public class SearchProjectAction extends AbstractAction {
     public Collection<Project> searchByLocation(String searchTerm) {
         
         Database database = Database.getInstance();
-        ArrayList<Project> foundProjects = new ArrayList<>();
+        LinkedHashSet<Project> foundProjects = new LinkedHashSet<>();
         
         for (Project project : database.getAllProjects()) {
             Entrepreneur entrepreneur = database.getEntrepreneur(project.getEntrepreneurId());

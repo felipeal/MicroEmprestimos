@@ -40,9 +40,10 @@ public class DonateToProjectAction extends AbstractAction {
         
         donator.setBalance(donator.getBalance() - amount);
         
-        Donation donation = new Donation(donatorId, amount);
+        Donation donation = new Donation(donatorId, projectId, amount);
         database.save(donation);
         project.addDonation(donation.getId());
+        donator.addDonation(donation.getId());
         System.out.println(donation.getId());
     }
 }
