@@ -7,6 +7,7 @@ package clientcommunication;
 
 import business.action.SearchProjectAction;
 import business.domain.Project;
+import clientcommunication.HandleClient.Role;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,9 @@ public class SearchProjectCommunication extends AbstractCommunication {
     
     /**
      * Communicates with the client to execute the search.
+     * @param role
      */
-    public void search() {
+    public void search(int clientId, Role role) {
         
         ArrayList<Project> projects;
         
@@ -38,6 +40,12 @@ public class SearchProjectCommunication extends AbstractCommunication {
         
         // Gets the line containing the mode for the search
         switch (mode) {
+            case "owned":
+                toClient.println("success");
+                fromClient.nextLine(); // Discard value
+                projects = getOwnedProjects(clientId, role);
+                break;
+            
             case "title":
                 toClient.println("success");
                 String title = fromClient.nextLine();
@@ -107,33 +115,66 @@ public class SearchProjectCommunication extends AbstractCommunication {
         
         // For each project, send the id and the title
         for (Project project : projects) {
-            System.out.println(project.getId());
-            toClient.println(project.getId());
-            System.out.println(project.getTitle());
-            toClient.println(project.getTitle());
+            // Project id
+            int id = project.getId();
+            System.out.println("Id: " + id);
+            // Send project id
+            toClient.println(id);
+            
+            // Project title
+            String title = project.getTitle();
+            System.out.println("Title: " + title);
+            // Send project title
+            toClient.println(title);
+            
+            // Project owner
+            String entrepreneur = searchProjectAction.getSelectedProjectEntrepreneur(id).getName();
+            System.out.println("Entrepreneur: " + entrepreneur);
+            // Send project owner
+            toClient.println(entrepreneur);
+            
+            // Project location
+            String location = searchProjectAction.getSelectedProjectEntrepreneur(id).getLocation();
+            System.out.println("Location: " + location);
+            // Send project location
+            toClient.println(location);
+            
+            // Target value
+            float target = project.getTargetValue();
+            System.out.println("Target value: " + target);
+            // Send target value
+            toClient.println(target);
+            
+            // Donated amount
+            float donated = project.getDonatedAmount();
+            System.out.println("Donated amount: " + donated);
+            // Send donated amount
+            toClient.println(donated);
+            
+            // Limit date
+            String limitDate = project.getLimitDate();
+            System.out.println("Limit date: " + limitDate);
+            // Send limit date
+            toClient.println(limitDate);
         }
         
         // Send the finish mark value
         toClient.println("end");
+        System.out.println("Done");
     }
     
     /**
      * Send to client all the projects he owns.
      * @param clientId 
      */
-    public void getOwnedProjects(int clientId) {
-        // Get all projects from entrepreneur
-        List<Project> projects = new ArrayList<>(searchProjectAction.searchByEntrepreneurId(clientId));
+    private ArrayList getOwnedProjects(int clientId, Role role) {
+        if (role == Role.Entrepreneur)
+            return new ArrayList(searchProjectAction.searchByEntrepreneurId(clientId));
         
-        for (Project project : projects) {
-            // Send project id
-            toClient.println(project.getId());
-            // Send project title
-            toClient.println(project.getTitle());
-        }
+        if (role == Role.Administrator)
+            return new ArrayList(searchProjectAction.searchByDonatorId(clientId));
         
-        // Send the finish mark value
-        toClient.println("end");
+        return new ArrayList();
     }
     
     /**

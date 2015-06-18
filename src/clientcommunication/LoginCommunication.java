@@ -42,6 +42,11 @@ public class LoginCommunication extends AbstractCommunication {
         // Receive password
         String password = fromClient.nextLine();
         
+        System.out.println("Login");
+        System.out.println("Role: " + role);
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        
         try {
             switch (role) {
 //                case "admin":
@@ -54,7 +59,6 @@ public class LoginCommunication extends AbstractCommunication {
 
                 case "entrepreneur":
                     loginData = new Pair<>(loginEntrepreneur(username, password), Role.Entrepreneur);
-                    loginEntrepreneur(username, password);
                     break;
 
                 default:
@@ -62,7 +66,9 @@ public class LoginCommunication extends AbstractCommunication {
                     toClient.println("exception");
                     toClient.println("No function available");
             }
+            System.out.println("Done");
         } catch (BusinessException e) {
+            System.out.println("Error: " + e.getMessage());
             // If failed to login, set as not logged and send the exception message
             loginData = new Pair<>(-1, Role.NotLogged);
             toClient.println("exception");
@@ -119,8 +125,6 @@ public class LoginCommunication extends AbstractCommunication {
 
         // Send the entrepreneur's name
         toClient.println(entrepreneur.getName());
-        // Send the entrepreneur's location
-        toClient.println(entrepreneur.getLocation());
         
         // Return the id
         return entrepreneur.getId();

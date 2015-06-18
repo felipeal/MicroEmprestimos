@@ -29,6 +29,7 @@ public class RegisterUserCommunication extends AbstractCommunication {
     public void registerUser() {
         // Receive the role
         String role = fromClient.nextLine();
+        System.out.println("Role: " + role);
         switch (role) {
 //            case "admin":
 //                break;
@@ -63,12 +64,19 @@ public class RegisterUserCommunication extends AbstractCommunication {
         // Receive name
         String name = fromClient.nextLine();
         
+        System.out.println("Registration");
+        System.out.println("Login: " + login);
+        System.out.println("Password: " + password);
+        System.out.println("Name: " + name);
+        
         try {
             // Try to register the user
             registerUserAction.registerDonator(login, password, name);
             // Send the register confirmation
+            System.out.println("Done");
             toClient.println("success");
         } catch (BusinessException ex) {
+            System.out.println("Error: " + ex.getMessage());
             // If something went wrong, send an exception
             toClient.println("exception");
             toClient.println(ex.getMessage());
@@ -88,12 +96,20 @@ public class RegisterUserCommunication extends AbstractCommunication {
         // Receive location
         String location = fromClient.nextLine();
         
+        System.out.println("Registration");
+        System.out.println("Login: " + login);
+        System.out.println("Password: " + password);
+        System.out.println("Name: " + name);
+        System.out.println("Location: " + location);
+        
         try {
             // Try to register the user
             registerUserAction.registerEntrepreneur(login, password, name, location);
             // Send the register confirmation
             toClient.println("success");
+            System.out.println("Done");
         } catch (BusinessException ex) {
+            System.out.println("Error: " + ex.getMessage());
             // If something went wrong, send an exception
             toClient.println("exception");
             toClient.println(ex.getMessage());

@@ -76,18 +76,13 @@ public class HandleClient implements Runnable {
                         new DonateToProjectCommunication(toClient, fromClient).donate(this.clientId);
                     }
                     break;
-                    
-                case "getOwnedProjects":
-                    if (checkLogin(Role.Entrepreneur)) {
-                        new SearchProjectCommunication(toClient, fromClient).getOwnedProjects(this.clientId);
-                    }
-                    break;
                 
                 case "getProject":
                     new SearchProjectCommunication(toClient, fromClient).getProject();
                     break;
                     
                 case "login":
+                    System.out.println("Client is trying to login.");
                     // Try to login and get the id and role of the client
                     Pair<Integer,Role> loginData = new LoginCommunication(toClient, fromClient).login();
                     // Set the id
@@ -97,13 +92,15 @@ public class HandleClient implements Runnable {
                     break;
                     
                 case "register":
+                    System.out.println("Client is trying to register.");
                     new RegisterUserCommunication(toClient, fromClient).registerUser();
                     break;
                 
                 case "search":
                     // Can only be done if logged in
                     if (checkLogin() == true) {
-                        new SearchProjectCommunication(toClient, fromClient).search();
+                        System.out.println("Client is searching projects.");
+                        new SearchProjectCommunication(toClient, fromClient).search(this.clientId, this.clientRole);
                     }
                     break;
                     
@@ -143,6 +140,7 @@ public class HandleClient implements Runnable {
             toClient.println("success");
             return true;
         } else {
+            System.out.println("Error: client not logged in.");
             toClient.println("exception");
             toClient.println("Client not logged in.");
             return false;
