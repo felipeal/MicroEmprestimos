@@ -78,6 +78,7 @@ public class HandleClient implements Runnable {
                     break;
                 
                 case "getProject":
+                    System.out.println("Client is retrieving project data.");
                     new SearchProjectCommunication(toClient, fromClient).getProject();
                     break;
                     

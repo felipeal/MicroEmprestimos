@@ -31,8 +31,6 @@ public class DonateToProjectCommunication extends AbstractCommunication {
      * @param clientId 
      */
     public void donate(int clientId) {
-        // Send the function permission success
-        toClient.println("success");
         // Receive the project id
         int projectId = Integer.parseInt(fromClient.nextLine());
         // Receive the amount

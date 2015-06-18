@@ -28,17 +28,21 @@ public class WithdrawAction extends AbstractAction {
         Project project = database.getProject(projectId);
         
         if (project.isDone()) {
-            throw new BusinessException("Already withdrawed.");
+            System.out.println("Already withdrawed!");
+            throw new BusinessException("Already withdrawed!");
         }
         
         if (project.getEntrepreneurId() != entrepreneurId) {
+            System.out.println("Client is not project's owner.");
             throw new BusinessException("Client is not project's owner.");
         }
         
         if (project.getDonatedAmount() < project.getTargetValue()) {
+            System.out.println("Donations haven't reached target value.");
             throw new BusinessException("Donations haven't reached target value.");
         }
         
+        System.out.println("Success");
         project.setDone();
     }
 }

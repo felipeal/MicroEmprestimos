@@ -207,5 +207,6 @@ public class SearchProjectCommunication extends AbstractCommunication {
         toClient.println(project.getTargetValue());
         // Send limit date
         toClient.println(project.getLimitDate());
+        System.out.println("Done");
     }
 }
